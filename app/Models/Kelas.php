@@ -14,4 +14,9 @@ class Kelas extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function TahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class);
+    }
 }
