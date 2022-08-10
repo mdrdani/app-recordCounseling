@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('kelas_id');
-            $table->unsignedBigInteger('tahunajaran_id');
+            $table->bigInteger('nis')->unique();
+            $table->unsignedBigInteger('kelas_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('kelas_id')->references('id')->on('kelas');
-            $table->foreign('tahunajaran_id')->references('id')->on('tahun_ajarans');
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
         });
     }
 

@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('penanganan')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('siswa_id')->references('id')->on('siswas');
+            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
         });
     }
 
