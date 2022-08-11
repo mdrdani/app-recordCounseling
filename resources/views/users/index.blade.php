@@ -26,24 +26,14 @@
  <tr>
    <th>No</th>
    <th>Name</th>
-   <th>Email</th>
    <th>Username</th>
-   <th>Roles</th>
    <th width="280px">Action</th>
  </tr>
  @foreach ($users as $key => $user)
   <tr>
     <td>{{ ++$key }}</td>
     <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
     <td>{{ $user->username}}</td>
-    <td>
-      @if(!empty($user->getRoleNames()))
-        @foreach($user->getRoleNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
-        @endforeach
-      @endif
-    </td>
     <td>
        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
