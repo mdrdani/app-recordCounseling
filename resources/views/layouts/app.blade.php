@@ -49,6 +49,38 @@
                                 </li>
                             @endif
                         @else
+                            
+                        {{-- navbar Menu --}}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Menu
+                            </a>
+
+                            {{-- users --}}
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('users.index') }}">
+                                    Manage Users
+                                </a>
+
+                                <a class="dropdown-item" href="#">
+                                    Manage Kelas
+                                </a>
+
+                                <a class="dropdown-item" href="#">
+                                    Manage Tahun Ajaran
+                                </a>
+
+                                <a class="dropdown-item" href="#">
+                                    Manage Siswa
+                                </a>
+                            </div>
+                            {{-- end --}}
+
+                            
+                        </li>
+                        {{-- menu --}}
+
+                        {{-- navbar Auth User --}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -66,6 +98,7 @@
                                     </form>
                                 </div>
                             </li>
+                            {{-- end --}}
                         @endguest
                     </ul>
                 </div>
@@ -73,7 +106,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
