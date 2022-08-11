@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-// Auth::routes(['register' => false, 'reset' => false]);
-Auth::routes();
+Auth::routes(['register' => false, 'reset' => false]);
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
