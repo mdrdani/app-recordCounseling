@@ -46,9 +46,9 @@ class UserController extends Controller
         //
         $this->validate($request, [
             'name' => 'required|min:2',
-            'email' => 'required|email|unique:users, email',
+            'email' => 'required|email|unique:users,email',
             'username' => 'required|min:2',
-            'password' => 'required|sam:confirm-password',
+            'password' => 'required|min:2|same:confirm-password',
             'roles' => 'required'
         ]);
 
@@ -134,5 +134,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        User::find($id)->delete();
+        return redirect()->route('users.index')
+            ->with('success', 'User deleted successfully');
     }
 }
