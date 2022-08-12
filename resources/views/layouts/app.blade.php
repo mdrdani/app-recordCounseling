@@ -63,7 +63,7 @@
                                     Manage Users
                                 </a>
 
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('kelas.index') }}">
                                     Manage Kelas
                                 </a>
 

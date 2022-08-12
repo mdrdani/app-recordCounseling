@@ -19,4 +19,8 @@ class Kelas extends Model
     {
         return $this->belongsTo(TahunAjaran::class);
     }
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
