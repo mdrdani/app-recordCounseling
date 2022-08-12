@@ -18,6 +18,7 @@ class KelasController extends Controller
     {
         //
         $kelass = Kelas::orderBy('id', 'ASC')->paginate(6);
+        // dd($kelass);
         return view('kelas.index', compact('kelass'));
     }
 
@@ -29,8 +30,8 @@ class KelasController extends Controller
     public function create()
     {
         //
-        $users = User::pluck('name', 'name')->all();
-        $tahun_ajarans = TahunAjaran::plukc('tahun', 'tahun')->all();
+        $users = User::all();
+        $tahun_ajarans = TahunAjaran::all();
         return view('kelas.create', compact('users', 'tahun_ajarans'));
     }
 
@@ -43,6 +44,19 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string|min:3',
+            'user_id' => 'required',
+            'tahunajaran_id' => 'required'
+        ]);
+
+        $kelas = new Kelas;
+        $kelas->id = $request->id;
+        $kelas->name = $request->name;
+        $kelas->user_id = $request->user_id;
+        $kelas->tahunajaran_id = $request->tahunajaran_id;
+        $kelas->save();
+        return redirect()->route('kelas.index')->with('success', 'Class created Successfully');
     }
 
     /**

@@ -9,7 +9,7 @@
             <h2>Class Management</h2>
         </div>
         <div class="pull-right mb-2">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New Class</a>
+            <a class="btn btn-success" href="{{ route('kelas.create') }}"> Create New Class</a>
         </div>
     </div>
 </div>
@@ -34,19 +34,18 @@
   <tr>
     <td>{{ ++$key }}</td>
     <td>{{ $kelas->name }}</td>
-    @if($kelas->User->name != Null)
+    @if($kelas->user_id != Null)
             <td>{{ $kelas->User->name}}</td>
     @else
             <td><strong>Belum Ada Wali Kelas</strong></td>
     @endif
 
-    @if($kelas->TahunAjaran->tahun != Null)
+    @if($kelas->tahunajaran_id != Null)
             <td>{{ $kelas->TahunAjaran->tahun}}</td>
     @else
             <td><strong>Belum Ada Tahun Ajaran</strong></td>
     @endif
     <td>
-       <a class="btn btn-info" href="{{ route('kelas.show',$kelas->id) }}">Show</a>
        <a class="btn btn-primary" href="{{ route('kelas.edit',$kelas->id) }}">Edit</a>
        {!! Form::open(['method' => 'DELETE','route' => ['kelas.destroy', $kelas->id],'style'=>'display:inline']) !!}
                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
