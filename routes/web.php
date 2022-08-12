@@ -27,5 +27,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function () {
     // Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('kelas', KelasController::class);
+    Route::resource('kelas', KelasController::class)->except(['show']);
 });

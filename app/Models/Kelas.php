@@ -17,7 +17,7 @@ class Kelas extends Model
 
     public function TahunAjaran()
     {
-        return $this->belongsTo(TahunAjaran::class);
+        return $this->belongsTo(TahunAjaran::class, 'tahunajaran_id');
     }
     public function User()
     {

@@ -68,6 +68,7 @@ class KelasController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -79,6 +80,11 @@ class KelasController extends Controller
     public function edit($id)
     {
         //
+        $kelas = Kelas::find($id);
+        $wali_kelas = User::pluck('name', 'id');
+        $tahun_ajaran = TahunAjaran::pluck('tahun', 'id');
+
+        return view('kelas.edit', compact('kelas', 'wali_kelas', 'tahun_ajaran'));
     }
 
     /**
@@ -91,6 +97,17 @@ class KelasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string|min:3',
+            'user_id' => 'required',
+            'tahunajaran_id' => 'required'
+        ]);
+
+        $input = $request->all();
+        $kelas = Kelas::find($id);
+        $kelas->update($input);
+
+        return redirect()->route('kelas.index')->with('success', 'Class Updated Successfully');
     }
 
     /**
