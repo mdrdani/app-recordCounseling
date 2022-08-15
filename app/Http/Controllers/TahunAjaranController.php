@@ -27,6 +27,7 @@ class TahunAjaranController extends Controller
     public function create()
     {
         //
+        return view('tahunajaran.create');
     }
 
     /**
@@ -38,6 +39,16 @@ class TahunAjaranController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'tahun' => 'required|min:2'
+        ]);
+
+        $tahun = new TahunAjaran;
+        $tahun->id = $request->id;
+        $tahun->tahun = $request->tahun;
+        $tahun->save();
+
+        return redirect()->route('tahunajaran.index')->with('success', 'Create Tahun Ajaran Success');
     }
 
     /**

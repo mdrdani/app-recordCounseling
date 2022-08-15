@@ -9,7 +9,7 @@
             <h2>Tahun Arajan Management</h2>
         </div>
         <div class="pull-right mb-2">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New Tahun Ajaran</a>
+            <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"> Create New Tahun Ajaran</a>
         </div>
     </div>
 </div>
