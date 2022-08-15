@@ -47,7 +47,7 @@ class TahunAjaranController extends Controller
             'tahun' => $request->tahun
         ]);
 
-        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dibuat!']);
     }
 
     /**
@@ -67,11 +67,10 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TahunAjaran $tahunajaran)
     {
         //
-        $tahun = TahunAjaran::findOrFail($id);
-        return view('tahunajaran.edit', compact('tahun'));
+        return view('tahunajaran.edit', compact('tahunajaran'));
     }
 
     /**
@@ -81,17 +80,18 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TahunAjaran $tahunajaran)
     {
         //
         $this->validate($request, [
             'tahun' => 'required|min:2'
         ]);
-        $tahun = TahunAjaran::findOrFail($id);
-        $tahun->tahun = $request->tahun;
-        $tahun->save();
 
-        return redirect()->route('tahunajaran.index')->with('success', 'Update Tahun ajaran Success');
+        $tahunajaran->update([
+            'tahun' => $request->tahun
+        ]);
+
+        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -100,12 +100,12 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TahunAjaran $tahunajaran)
     {
         //
-        $tahun = TahunAjaran::findOrFail($id);
-        $tahun->delete();
 
-        return redirect()->route('tahunajaran.index')->with('success', 'Delete Tahun Ajaran Success');
+        $tahunajaran->delete();
+
+        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

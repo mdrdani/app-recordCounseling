@@ -24,7 +24,7 @@
   </div>
 @endif
 
-{!! Form::model($tahun, ['method' => 'PATCH','route' => ['tahunajaran.update', $tahun->id]]) !!}
+{!! Form::model($tahunajaran, ['method' => 'PATCH','route' => ['tahunajaran.update', $tahunajaran->id]]) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
