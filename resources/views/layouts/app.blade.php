@@ -67,7 +67,7 @@
                                     Manage Kelas
                                 </a>
 
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('tahunajaran.index') }}">
                                     Manage Tahun Ajaran
                                 </a>
 

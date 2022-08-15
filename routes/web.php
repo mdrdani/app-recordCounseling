@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\TahunAjaranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -28,4 +29,5 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('kelas', KelasController::class)->except(['show']);
+    Route::resource('tahunajaran', TahunAjaranController::class)->except(['show']);
 });
