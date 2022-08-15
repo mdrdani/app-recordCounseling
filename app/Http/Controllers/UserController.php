@@ -58,7 +58,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        return redirect()->route('users.index')->with(['success' => 'User created successfully']);
     }
 
     /**
@@ -67,10 +67,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
-        $user = User::findOrFail($id);
+        // dd('user');
         return view('users.show', compact('user'));
     }
 

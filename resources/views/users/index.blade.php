@@ -1,7 +1,9 @@
 
 @extends('layouts.app')
 
-
+@section('css')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endsection
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -14,35 +16,59 @@
     </div>
 </div>
 
-
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-  <p>{{ $message }}</p>
-</div>
-@endif
-
-
 <table class="table table-bordered">
- <tr>
-   <th>No</th>
-   <th>Name</th>
-   <th>Username</th>
-   <th width="280px">Action</th>
- </tr>
- @foreach ($users as $key => $user)
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th width="280px">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @forelse($users as $key => $user)
   <tr>
     <td>{{ ++$key }}</td>
     <td>{{ $user->name }}</td>
     <td>{{ $user->username}}</td>
     <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-       {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
+       <form action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
+        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>
+        <a href="{{ route('users.show', $user->id) }}" class="btn btn-md btn-warning">Show</a>
+        @csrf
+        @method('DELETE')
+        @if(Auth::user() == TRUE)
+                <button type="submit" class="btn btn-md btn-danger" disabled>Hapus</button>
+          @else
+        <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+        @endif
+      </form>
     </td>
   </tr>
- @endforeach
+  @empty
+  <div class="alert alert-danger">
+    Data User Belum tersedia
+  </div>
+ @endforelse
+  </tbody>
 </table>
 {{ $users->links() }}
 @endsection 
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    //message with toastr
+    @if(session()->has('success'))
+    
+        toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+
+    @elseif(session()->has('error'))
+
+        toastr.error('{{ session('error') }}', 'GAGAL!'); 
+        
+    @endif
+</script>
+@endsection
