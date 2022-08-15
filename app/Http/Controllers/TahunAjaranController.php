@@ -71,6 +71,8 @@ class TahunAjaranController extends Controller
     public function edit($id)
     {
         //
+        $tahun = TahunAjaran::findOrFail($id);
+        return view('tahunajaran.edit', compact('tahun'));
     }
 
     /**
@@ -83,6 +85,14 @@ class TahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'tahun' => 'required|min:2'
+        ]);
+        $tahun = TahunAjaran::findOrFail($id);
+        $tahun->tahun = $request->tahun;
+        $tahun->save();
+
+        return redirect()->route('tahunajaran.index')->with('success', 'Update Tahun ajaran Success');
     }
 
     /**
@@ -94,5 +104,9 @@ class TahunAjaranController extends Controller
     public function destroy($id)
     {
         //
+        $tahun = TahunAjaran::findOrFail($id);
+        $tahun->delete();
+
+        return redirect()->route('tahunajaran.index')->with('success', 'Delete Tahun Ajaran Success');
     }
 }
