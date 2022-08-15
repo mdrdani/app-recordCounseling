@@ -108,8 +108,10 @@
 
         <main class="py-4">
             <div class="container">
+                @yield('css')
                 @yield('content')
-            </div>
+                @yield('scripts')
+            </div> 
         </main>
     </div>
 </body>

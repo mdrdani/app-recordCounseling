@@ -43,12 +43,11 @@ class TahunAjaranController extends Controller
             'tahun' => 'required|min:2'
         ]);
 
-        $tahun = new TahunAjaran;
-        $tahun->id = $request->id;
-        $tahun->tahun = $request->tahun;
-        $tahun->save();
+        TahunAjaran::create([
+            'tahun' => $request->tahun
+        ]);
 
-        return redirect()->route('tahunajaran.index')->with('success', 'Create Tahun Ajaran Success');
+        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
