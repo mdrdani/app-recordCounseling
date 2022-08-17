@@ -18,7 +18,6 @@ class KelasController extends Controller
     {
         //
         $kelass = Kelas::orderBy('id', 'ASC')->paginate(6);
-        // dd($kelass);
         return view('kelas.index', compact('kelass'));
     }
 
@@ -50,13 +49,21 @@ class KelasController extends Controller
             'tahunajaran_id' => 'required'
         ]);
 
-        $kelas = new Kelas;
-        $kelas->id = $request->id;
-        $kelas->name = $request->name;
-        $kelas->user_id = $request->user_id;
-        $kelas->tahunajaran_id = $request->tahunajaran_id;
-        $kelas->save();
-        return redirect()->route('kelas.index')->with('success', 'Class created Successfully');
+        Kelas::create([
+            'id' => $request->id,
+            'name' => $request->name,
+            'user_id' => $request->user_id,
+            'tahunajaran_id' => $request->tahunajaran_id
+        ]);
+
+        // $kelas = new Kelas;
+        // $kelas->id = $request->id;
+        // $kelas->name = $request->name;
+        // $kelas->user_id = $request->user_id;
+        // $kelas->tahunajaran_id = $request->tahunajaran_id;
+        // $kelas->save();
+
+        return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil dibuat']);
     }
 
     /**

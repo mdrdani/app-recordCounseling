@@ -2,6 +2,9 @@
 @extends('layouts.app')
 
 
+@section('css')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endsection
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -14,45 +17,65 @@
     </div>
 </div>
 
-
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-  <p>{{ $message }}</p>
-</div>
-@endif
-
-
 <table class="table table-bordered">
- <tr>
-   <th>No</th>
-   <th>Kelas</th>
-   <th>Wali Kelas</th>
-   <th>Tahun Ajaran</th>
-   <th width="280px">Action</th>
- </tr>
- @foreach ($kelass as $key => $kelas)
-  <tr>
-    <td>{{ ++$key }}</td>
-    <td>{{ $kelas->name }}</td>
-    @if($kelas->user_id != Null)
-            <td>{{ $kelas->User->name}}</td>
-    @else
-            <td><strong>Belum Ada Wali Kelas</strong></td>
-    @endif
-
-    @if($kelas->tahunajaran_id != Null)
-            <td>{{ $kelas->TahunAjaran->tahun}}</td>
-    @else
-            <td><strong>Belum Ada Tahun Ajaran</strong></td>
-    @endif
-    <td>
-       <a class="btn btn-primary" href="{{ route('kelas.edit',$kelas->id) }}">Edit</a>
-       {!! Form::open(['method' => 'DELETE','route' => ['kelas.destroy', $kelas->id],'style'=>'display:inline']) !!}
-                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-    </td>
-  </tr>
- @endforeach
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Kelas</th>
+      <th>Wali Kelas</th>
+      <th>Tahun Ajaran</th>
+      <th width="280px">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @forelse ($kelass as $key => $kelas)
+     <tr>
+       <td>{{ ++$key }}</td>
+       <td>{{ $kelas->name }}</td>
+       @if($kelas->user_id != Null)
+               <td>{{ $kelas->User->name}}</td>
+       @else
+               <td><strong>Belum Ada Wali Kelas</strong></td>
+       @endif
+   
+       @if($kelas->tahunajaran_id != Null)
+               <td>{{ $kelas->TahunAjaran->tahun}}</td>
+       @else
+               <td><strong>Belum Ada Tahun Ajaran</strong></td>
+       @endif
+       <td>
+        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('kelas.destroy', $kelas->id) }}" method="POST">
+             <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-md btn-primary">Edit</a>
+         @csrf
+         @method('DELETE')
+         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+       </form>
+     </td>
+     </tr>
+     @empty
+     <div class="alert alert-danger">
+       Data Kelas Belum Tersedia
+     </div>
+    @endforelse
+  </tbody>
 </table>
 {{ $kelass->links() }}
 @endsection 
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    //message with toastr
+    @if(session()->has('success'))
+    
+        toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+
+    @elseif(session()->has('error'))
+
+        toastr.error('{{ session('error') }}', 'GAGAL!'); 
+        
+    @endif
+</script>
+@endsection

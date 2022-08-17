@@ -13,54 +13,49 @@
     </div>
 </div>
 
-@if (count($errors) > 0)
-  <div class="alert alert-danger">
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-    <ul>
-       @foreach ($errors->all() as $error)
-         <li>{{ $error }}</li>
-       @endforeach
-    </ul>
-  </div>
-@endif
 
-{!! Form::open(array('route' => 'kelas.store','method'=>'POST')) !!}
+<form action="{{ route('kelas.store') }}" method="POST">
+@csrf
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <label class="font-weight-bold">Nama Kelas</label>
+    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Kelas" autocomplete="off">
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Wali Kelas:</strong>
-            <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
-                <option value="">Pilih Wali Kelas</option>
-                @foreach ($users as $user)
-                  <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-              </select>
+    <!-- error message untuk title -->
+    @error('name')
+        <div class="alert alert-danger mt-2">
+            {{ $message }}
         </div>
-    </div>
+    @enderror
+  </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Tahun Ajaran:</strong>
-            <select name="tahunajaran_id" id="tahunajaran_id" class="form-control @error('tahunajaran_id') is-invalid @enderror">
-                <option value="">Pilih Tahun Ajaran</option>
-                @foreach ($tahun_ajarans as $tahun)
-                  <option value="{{$tahun->id}}">{{$tahun->tahun}}</option>
-                @endforeach
-              </select>
-        </div>
-    </div>
-    
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+  <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+          <strong>Wali Kelas:</strong>
+          <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
+              <option value="">Pilih Wali Kelas</option>
+              @foreach ($users as $user)
+                <option value="{{$user->id}}">{{$user->name}}</option>
+              @endforeach
+            </select>
+      </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+          <strong>Tahun Ajaran:</strong>
+          <select name="tahunajaran_id" id="tahunajaran_id" class="form-control @error('tahunajaran_id') is-invalid @enderror">
+              <option value="">Pilih Tahun Ajaran</option>
+              @foreach ($tahun_ajarans as $tahun)
+                <option value="{{$tahun->id}}">{{$tahun->tahun}}</option>
+              @endforeach
+            </select>
+      </div>
+  </div>
+  
+  <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </div>
-{!! Form::close() !!}
-
+</form>
 @endsection
