@@ -49,19 +49,12 @@ class KelasController extends Controller
             'tahunajaran_id' => 'required'
         ]);
 
-        Kelas::create([
-            'id' => $request->id,
-            'name' => $request->name,
-            'user_id' => $request->user_id,
-            'tahunajaran_id' => $request->tahunajaran_id
-        ]);
-
-        // $kelas = new Kelas;
-        // $kelas->id = $request->id;
-        // $kelas->name = $request->name;
-        // $kelas->user_id = $request->user_id;
-        // $kelas->tahunajaran_id = $request->tahunajaran_id;
-        // $kelas->save();
+        $kelas = new Kelas;
+        $kelas->id = $request->id;
+        $kelas->name = $request->name;
+        $kelas->user_id = $request->user_id;
+        $kelas->tahunajaran_id = $request->tahunajaran_id;
+        $kelas->save();
 
         return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil dibuat']);
     }
@@ -114,7 +107,7 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         $kelas->update($input);
 
-        return redirect()->route('kelas.index')->with('success', 'Class Updated Successfully');
+        return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Di Update']);
     }
 
     /**
@@ -127,6 +120,6 @@ class KelasController extends Controller
     {
         //
         Kelas::find($id)->delete();
-        return redirect()->route('kelas.index')->with('success', 'Class Deleted Successfully');
+        return redirect()->route('kelas.index')->with(['success' => 'Class Deleted Successfully']);
     }
 }
