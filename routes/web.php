@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjaranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -20,8 +21,8 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Auth::routes(['register' => false, 'reset' => false]);
-// Auth::routes();
+// Auth::routes(['register' => false, 'reset' => false]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -30,4 +31,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('kelas', KelasController::class)->except(['show']);
     Route::resource('tahunajaran', TahunAjaranController::class)->except(['show']);
+    Route::resource('siswas', SiswaController::class);
 });

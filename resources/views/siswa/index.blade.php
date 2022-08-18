@@ -8,10 +8,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Tahun Ajaran Management</h2>
+            <h2>Siswa Management</h2>
         </div>
         <div class="pull-right mb-2">
-            <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"> Create New Tahun Ajaran</a>
+            <a class="btn btn-success" href="{{ route('siswas.create') }}"> Create New Siswa</a>
         </div>
     </div>
 </div>
@@ -21,18 +21,23 @@
  <thead>
    <tr>
     <th>No</th>
-    <th>Tahun</th>
+    <th>Nama</th>
+    <th>Kelas</th>
+    <th>Wali Kelas</th>
     <th width="280px">Action</th>
   </tr>
  </thead>
  <tbody>
-  @forelse ($tahunajarans as $key => $tahun)
+  @forelse ($siswas as $key => $siswa)
   <tr>
     <td><center>{{ ++$key }}</center></td>
-    <td>{{ $tahun->tahun }}</td>
+    <td>{{ $siswa->name }}</td>
+    <td>{{ $siswa->Kelas->name}}</td>
+    <td>{{ $siswa->Kelas->User->name }}</td>
     <td>
-       <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST">
-            <a href="{{ route('tahunajaran.edit', $tahun->id) }}" class="btn btn-md btn-primary">Edit</a>
+       <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('siswas.destroy', $siswa->id) }}" method="POST">
+            <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Show Record</a>
+            <a href="{{ route('siswas.edit', $siswa->id) }}" class="btn btn-md btn-primary">Edit</a>
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
@@ -41,12 +46,12 @@
   </tr>
   @empty
   <div class="alert alert-danger">
-    Data Tahun Ajaran Belum Tersedia
+    Data Siswa Belum Tersedia
   </div>
  @endforelse
  </tbody>
 </table>
-{{ $tahunajarans->links() }}
+{{ $siswas->links() }}
 @endsection 
 
 @section('scripts')

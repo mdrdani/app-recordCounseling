@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TahunAjaran;
+use App\Models\Kelas;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
-class TahunAjaranController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class TahunAjaranController extends Controller
     public function index()
     {
         //
-        $tahunajarans = TahunAjaran::orderBy('id', 'DESC')->paginate(5);
-        return view('tahunajaran.index', compact('tahunajarans'));
+        $siswas = Siswa::latest()->paginate(10);
+        return view('siswa.index', compact('siswas'));
     }
 
     /**
@@ -27,7 +28,8 @@ class TahunAjaranController extends Controller
     public function create()
     {
         //
-        return view('tahunajaran.create');
+        $kelas = Kelas::all();
+        return view('siswa.create', compact('kelas'));
     }
 
     /**
@@ -36,16 +38,22 @@ class TahunAjaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, TahunAjaran $tahunajaran)
+    public function store(Request $request)
     {
         //
         $this->validate($request, [
-            'tahun' => 'required|min:2'
+            'name' => 'required|min:2|string',
+            'nis' => 'required|min:2|numeric|unique:siswas,nis',
         ]);
 
-        $tahunajaran->create($request->all());
+        $siswa = new Siswa;
+        $siswa->id = $request->id;
+        $siswa->name = $request->name;
+        $siswa->nis = $request->nis;
+        $siswa->kelas_id = $request->kelas_id;
+        $siswa->save();
 
-        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dibuat!']);
+        return redirect()->route('siswas.index')->with(['success' => 'Data berhasil di buat']);
     }
 
     /**
@@ -57,6 +65,8 @@ class TahunAjaranController extends Controller
     public function show($id)
     {
         //
+        $siswa = Siswa::findOrFail($id);
+        return view('siswa.show', compact('siswa'));
     }
 
     /**
@@ -65,10 +75,9 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TahunAjaran $tahunajaran)
+    public function edit($id)
     {
         //
-        return view('tahunajaran.edit', compact('tahunajaran'));
     }
 
     /**
@@ -78,16 +87,9 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TahunAjaran $tahunajaran)
+    public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'tahun' => 'required|min:2'
-        ]);
-
-        $tahunajaran->update($request->all());
-
-        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -96,12 +98,8 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TahunAjaran $tahunajaran)
+    public function destroy($id)
     {
         //
-
-        $tahunajaran->delete();
-
-        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
