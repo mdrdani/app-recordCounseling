@@ -18,9 +18,6 @@
 <div class="row">
     <div class="container">
         <div class="main-body">
-        
-              
-        
               <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
                   <div class="card">
@@ -85,15 +82,16 @@
                           <h6 class="mb-0">Dibuat :</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ Carbon\Carbon::parse($siswa->created_at)->format('d M Y ') }}
+                          {{ Carbon\Carbon::parse($siswa->created_at)->format('d M Y H:i') }}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-    
             </div>
-        </div>
+    </div>
+
+    @include('notes.index')
 </div>
 @endsection 
