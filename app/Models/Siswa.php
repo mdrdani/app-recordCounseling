@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Siswa extends Model
 {
@@ -14,6 +15,8 @@ class Siswa extends Model
     protected $fillable = [
         'name',
         'nis',
+        'jenis_kelamin',
+        'tanggal_lahir'
     ];
 
     public function Kelas()

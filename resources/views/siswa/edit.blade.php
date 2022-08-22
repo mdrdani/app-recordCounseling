@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Siswa</h2>
+            <h2>Edit Siswa</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('siswas.index') }}"> Back</a>
@@ -18,13 +18,14 @@
     </div>
 </div>
 
-<form action="{{ route('siswas.store') }}" method="POST" >
+<form action="{{ route('siswas.update', $siswa->id) }}" method="POST" >
     @csrf
+    @method('PUT')
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Nama Siswa</strong>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $siswa->name) }}">
                             
                                 <!-- error message untuk title -->
                                 @error('name')
@@ -38,7 +39,14 @@
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Nomor Induk Siswa</strong>
-                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off">
+                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off" value="{{ old('nis', $siswa->nis) }}">
+                            
+                                <!-- error message untuk title -->
+                                @error('nis')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
             </div>
         </div>
 
@@ -47,23 +55,16 @@
                 <strong>Jenis Kelamin</strong>
                 <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
                     <option value="">Pilih Jenis Kelamin</option>
-                      <option value="Laki-Laki">Laki - Laki</option>
-                      <option value="Perempuan">Perempuan</option>
+                      <option {{ $siswa->jenis_kelamin == "Laki-Laki" ? "selected" : "" }} value="Laki-Laki">Laki - Laki</option>
+                      <option {{ $siswa->jenis_kelamin == "Perempuan" ? "selected" : "" }} value="Perempuan">Perempuan</option>
                   </select>
-
-                  <!-- error message untuk title -->
-                  @error('jenis_kelamin')
-                  <div class="alert alert-danger mt-2">
-                      {{ $message }}
-                  </div>
-              @enderror
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Tanggal Lahir</strong>
-                <input type="text" id="from-datepicker" name="tanggal_lahir" class="form-control" autocomplete="off">
+                <input type="text" id="from-datepicker" name="tanggal_lahir" class="form-control" autocomplete="off" value="{{ $siswa->tanggal_lahir }}">
             </div>
         </div>
 
@@ -72,23 +73,15 @@
                 <strong>Kelas</strong>
                 <select name="kelas_id" id="kelas_id" class="form-control @error('kelas_id') is-invalid @enderror">
                     <option value="">Pilih Kelas</option>
-                    @foreach ($kelas as $k)
-                      <option value="{{$k->id}}">{{$k->name}}</option>
+                    @foreach ($kelas as $id => $k)
+                            <option value="{{$id}}" {{ $id == $siswa->kelas_id ? 'selected' : '' }}>{{$k}}</option>
                     @endforeach
                   </select>
-
-                  <!-- error message untuk title -->
-                  @error('kelas_id')
-                  <div class="alert alert-danger mt-2">
-                      {{ $message }}
-                  </div>
-              @enderror
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
             <button type="submit" class="btn btn-md btn-primary">Submit</button>
-            <button type="reset" class="btn btn-md btn-warning">Reset</button>
         </div>
     </div>
 </form>
@@ -101,8 +94,7 @@
 <script>
 $( document ).ready(function() {     
 $("#from-datepicker").datepicker({          
-        format: 'yyyy-mm-dd', //can also use format: 'dd-mm-yyyy' 
-        todayHighlight: true
+format: 'yyyy-mm-dd' //can also use format: 'dd-mm-yyyy'     
 });      
 });  
 </script>
