@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('siswa_id');
             $table->date('tanggal');
-            $table->string('masalah')->nullable();
-            $table->string('penanganan')->nullable();
+            $table->longText('masalah');
+            $table->longText('penanganan')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
             $table->softDeletes();

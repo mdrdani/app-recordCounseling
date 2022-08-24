@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -71,7 +72,8 @@ class SiswaController extends Controller
     {
         //
         $siswa = Siswa::findOrFail($id);
-        return view('siswa.show', compact('siswa'));
+        $notes = Note::where('siswa_id', $id)->latest()->get();
+        return view('siswa.show', compact('siswa', 'notes'));
     }
 
     /**

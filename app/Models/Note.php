@@ -12,9 +12,15 @@ class Note extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'siswa_id',
         'tanggal',
         'masalah',
         'penanganan',
         'foto',
     ];
+
+    public function Siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
 }

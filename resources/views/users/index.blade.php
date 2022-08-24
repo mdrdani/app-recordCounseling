@@ -22,6 +22,7 @@
       <th>No</th>
       <th>Name</th>
       <th>Username</th>
+      <th>Roles</th>
       <th width="280px">Action</th>
     </tr>
   </thead>
@@ -31,6 +32,13 @@
     <td>{{ ++$key }}</td>
     <td>{{ $user->name }}</td>
     <td>{{ $user->username}}</td>
+    <td>
+      @if(!empty($user->getRoleNames()))
+        @foreach ($user->getRoleNames() as $v)
+            <label for="" class="badge badge-success">{{ $v }}</label>
+        @endforeach
+      @endif
+    </td>
     <td>
        <form action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>

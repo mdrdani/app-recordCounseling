@@ -5,11 +5,9 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
-        {{-- <div class="pull-left">
-            <h2> User - {{ $siswa->name }}</h2>
-        </div> --}}
         <div class="pull-right">
             <a class="btn btn-primary mb-2" href="{{ route('siswas.index') }}"> Back</a>
+            <a class="btn btn-success mb-2" href="{{ route('notes.create', $siswa->id) }}"> Buat Laporan Konseling</a>
         </div>
     </div>
 </div>
@@ -45,7 +43,7 @@
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ $siswa->name }}
+                          <b>{{ $siswa->name }}</b>
                         </div>
                       </div>
                       <hr>
@@ -90,8 +88,7 @@
                 </div>
               </div>
             </div>
-    </div>
-
-    @include('notes.index')
+          </div>
+          @include('notes.index')
 </div>
 @endsection 

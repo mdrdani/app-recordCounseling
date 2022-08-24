@@ -24,6 +24,7 @@
     <th>Nama</th>
     <th>Kelas</th>
     <th>Wali Kelas</th>
+    <th>Tahun Ajaran</th>
     <th width="280px">Action</th>
   </tr>
  </thead>
@@ -34,6 +35,7 @@
     <td>{{ $siswa->name }}</td>
     <td>{{ $siswa->Kelas->name}}</td>
     <td>{{ $siswa->Kelas->User->name }}</td>
+    <td>{{ $siswa->Kelas->TahunAjaran->tahun }}</td>
     <td>
        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('siswas.destroy', $siswa->id) }}" method="POST">
             <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Show Record</a>
