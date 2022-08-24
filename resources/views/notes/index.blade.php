@@ -11,10 +11,7 @@
     @foreach($notes as $key => $note)  
     <h3 id="list-item-{{ $key+1 }}"><u>Konseling-{{ $key+1 }}</u></h3>
     <h5><strong>Permasalahan : </strong></h5>
-    <h5>{!! $note->masalah !!}</h5>
-    
-    <h5><strong>Penanganan : </strong></h5>
-    <h5>{!! $note->penanganan !!}</h5>    
+    <h5>{!! $note->masalah !!}</h5> 
     <a href="#" class="btn btn-primary btn-sm mb-3">Detail Laporan</a>
       @endforeach
     </div>
