@@ -59,17 +59,20 @@
 
                             {{-- users --}}
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                
+
                                 <a class="dropdown-item" href="{{ route('tahunajaran.index') }}">
                                     Manage Tahun Ajaran
+                                </a>
+
+                                <a class="dropdown-item" href="{{ route('users.index') }}">
+                                    Manage Users
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('kelas.index') }}">
                                     Manage Kelas
                                 </a>
 
-                                <a class="dropdown-item" href="{{ route('users.index') }}">
-                                    Manage Users
-                                </a>
 
                                 <a class="dropdown-item" href="{{ route('siswas.index') }}">
                                     Manage Siswa

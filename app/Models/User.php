@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Kelas::class);
     }
+
+    public function Note()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

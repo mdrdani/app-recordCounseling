@@ -1,3 +1,4 @@
+@if(!$notes->isEmpty())
 <div class="col-2">
   <div id="list-example" class="list-group">
     @foreach ($notes as $key => $note)
@@ -9,11 +10,17 @@
 <div class="col-10">
   <div data-bs-spy="scroll" data-bs-target="#list-example" style="overflow-y: scroll; height:450px" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
     @foreach($notes as $key => $note)  
-    <h3 id="list-item-{{ $key+1 }}"><u>Konseling-{{ $key+1 }}</u></h3>
-    <h5><strong>Permasalahan : </strong></h5>
-    <h5>{!! $note->masalah !!}</h5> 
-    <a href="#" class="btn btn-primary btn-sm mb-3">Detail Laporan</a>
-      @endforeach
+      <h3 id="list-item-{{ $key+1 }}">Konseling-{{ $key+1 }}</h3>
+      <h5><strong>Permasalahan : </strong></h5>
+      <h5>{!! $note->masalah !!}</h5> 
+      <span>Dibuat Tanggal : {{ Carbon\Carbon::parse($note->created_at)->format('d M Y H:i') }} WIB<br> Oleh : {{ $note->User->name }} </span>
+      <br>
+      <a href="{{ route('notes.show', ['id' => $note->siswa_id, 'note' => $note->id]) }}" class="btn btn-info btn-md mb-4" target="_blank">Detail Laporan</a>
+        @endforeach
     </div>
 </div>
-
+@else
+<div class="alert alert-danger">
+  Data Konseling Masih Kosong
+</div>
+@endif

@@ -13,6 +13,7 @@ class Note extends Model
 
     protected $fillable = [
         'siswa_id',
+        'user_id',
         'tanggal',
         'masalah',
         'penanganan',
@@ -22,5 +23,10 @@ class Note extends Model
     public function Siswa()
     {
         return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

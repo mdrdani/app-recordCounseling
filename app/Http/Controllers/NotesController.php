@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotesController extends Controller
 {
@@ -53,6 +54,7 @@ class NotesController extends Controller
 
             $note->create([
                 'siswa_id' => $request->siswa_id,
+                'user_id' => Auth::user()->id,
                 'tanggal' => $request->tanggal,
                 'masalah' => $request->masalah,
                 'penanganan' => $request->penanganan,
@@ -61,6 +63,7 @@ class NotesController extends Controller
         } else {
             $note->create([
                 'siswa_id' => $request->siswa_id,
+                'user_id' => Auth::user()->id,
                 'tanggal' => $request->tanggal,
                 'masalah' => $request->masalah,
                 'penanganan' => $request->penanganan,
@@ -76,9 +79,12 @@ class NotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $note)
     {
         //
+        $siswa = Siswa::findOrFail($id);
+        $note = Note::findOrFail($id);
+        return view('notes.show', compact('siswa', 'note'));
     }
 
     /**

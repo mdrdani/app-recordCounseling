@@ -74,6 +74,7 @@ class SiswaController extends Controller
         $siswa = Siswa::findOrFail($id);
         $note = Note::Orderby('id', 'asc')->where('siswa_id', $id)->get();
         $notes = $note->reverse();
+        // dd($notes);
         return view('siswa.show', compact('siswa', 'notes'));
     }
 

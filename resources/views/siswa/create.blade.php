@@ -102,7 +102,8 @@
 $( document ).ready(function() {     
 $("#from-datepicker").datepicker({          
         format: 'yyyy-mm-dd', //can also use format: 'dd-mm-yyyy' 
-        todayHighlight: true
+        todayHighlight: true,
+        autoclose: true
 });      
 });  
 </script>
