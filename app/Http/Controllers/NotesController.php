@@ -83,7 +83,8 @@ class NotesController extends Controller
     {
         //
         $siswa = Siswa::findOrFail($id);
-        $note = Note::findOrFail($id);
+        $note = Note::findOrFail($note);
+        // dd($note);
         return view('notes.show', compact('siswa', 'note'));
     }
 

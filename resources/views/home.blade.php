@@ -13,8 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    <img src="https://pbs.twimg.com/profile_images/1410453968/SDB_logo_400x400.jpg" alt="" width="30%" class="rounded mx-auto d-block">
+                    <p class="h3 mt-2 text-center">Selamat Datang Di Aplikasi Record Counseling <br> Sekolah Darma Bangsa</p>
                 </div>
             </div>
         </div>
