@@ -6,6 +6,7 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
             <a class="btn btn-primary mb-2" href="{{ route('siswas.show', $siswa->id) }}"> Back</a>
+            <a class="btn btn-success mb-2" href="{{ route('notes.edit', ['id' => $siswa->id, 'note' => $note->id]) }}"> Edit Catatan</a>
         </div>
     </div>
 </div>

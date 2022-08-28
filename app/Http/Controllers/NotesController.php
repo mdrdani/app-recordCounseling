@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NotesController extends Controller
 {
@@ -94,9 +95,12 @@ class NotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $note)
     {
         //
+        $siswa = Siswa::findOrFail($id);
+        $note = Note::findOrFail($note);
+        return view('notes.edit', compact('siswa', 'note'));
     }
 
     /**
@@ -106,9 +110,39 @@ class NotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $note)
     {
         //
+        $this->validate($request, [
+            'tanggal' => 'required|date',
+            'masalah' => 'required|min:2',
+            'penanganan' => 'nullable',
+            'foto' => 'nullable|image|mimes:png,jpg,jpeg,gif,svg|max:2048'
+        ]);
+
+        $siswa = Siswa::findOrFail($id);
+        $note = Note::findOrFail($note);
+
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $image->storeAs('public/lampiranNote', $image->hashName());
+            Storage::delete('public/lampiranNote/' . $note->foto);
+
+            $note->update([
+                'tanggal' => $request->tanggal,
+                'masalah' => $request->masalah,
+                'penanganan' => $request->penanganan,
+                'foto' => $image->hashName(),
+            ]);
+        } else {
+            $note->update([
+                'tanggal' => $request->tanggal,
+                'masalah' => $request->masalah,
+                'penanganan' => $request->penanganan,
+            ]);
+        }
+
+        return redirect()->back()->with(['success' => 'Data Berhasil diupdate']);
     }
 
     /**
