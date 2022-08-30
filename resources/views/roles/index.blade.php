@@ -8,13 +8,13 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Users Management</h2>
+            <h2>Role Management</h2>
         </div>
-        @can('user-create')
         <div class="pull-right mb-2">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            @can('role-create')
+            <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
+            @endcan
         </div>
-        @endcan
     </div>
 </div>
 
@@ -23,35 +23,23 @@
     <tr>
       <th>No</th>
       <th>Name</th>
-      <th>Username</th>
-      <th>Roles</th>
       <th width="280px">Action</th>
     </tr>
   </thead>
   <tbody>
-    @forelse($users as $key => $user)
+    @forelse($roles as $key => $role)
   <tr>
     <td>{{ ++$key }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->username}}</td>
+    <td>{{ $role->name }}</td>
     <td>
-      @if(!empty($user->getRoleNames()))
-        @foreach($user->getRoleNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
-        @endforeach
-      @endif
-    </td>
-    <td>
-      @can('user-edit')
-      <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>
-      @endcan
+        @can('role-edit')
+        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-md btn-primary">Edit</a>
+        @endcan
 
-      @can('user-list')
-      <a href="{{ route('users.show', $user->id) }}" class="btn btn-md btn-warning">Show</a>
-      @endcan
-
-      @can('user-delete')
-      <form action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
+        <a href="{{ route('roles.show', $role->id) }}" class="btn btn-md btn-warning">Show</a>
+        
+        @can('role-delete')
+        <form action="{{ route('roles.destroy', $role->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
         @csrf
         @method('DELETE')
         @if(Auth::user() == TRUE)
@@ -59,13 +47,14 @@
           @else
         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
         @endif
+        @endcan
+      
       </form>
-      @endcan
     </td>
   </tr>
   @empty
   <div class="alert alert-danger">
-    Data User Belum tersedia
+    Data Role Belum tersedia
   </div>
  @endforelse
   </tbody>

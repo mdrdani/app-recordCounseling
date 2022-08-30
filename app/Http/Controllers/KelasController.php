@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:kelas-list|kelas-create|kelas-edit|kelas-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:kelas-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:kelas-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:kelas-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -60,23 +60,35 @@
                             {{-- users --}}
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 
-
-                                <a class="dropdown-item" href="{{ route('tahunajaran.index') }}">
-                                    Manage Tahun Ajaran
+                                @can('role-list')
+                                <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                    Manage Role
                                 </a>
-
+                                @endcan
+                                
+                                @can('user-list')
                                 <a class="dropdown-item" href="{{ route('users.index') }}">
                                     Manage Users
                                 </a>
+                                @endcan
 
+                                @can('tahunajaran-list')
+                                <a class="dropdown-item" href="{{ route('tahunajaran.index') }}">
+                                    Manage Tahun Ajaran
+                                </a>
+                                @endcan
+
+                                @can('kelas-list')
                                 <a class="dropdown-item" href="{{ route('kelas.index') }}">
                                     Manage Kelas
                                 </a>
+                                @endcan
 
-
+                                @can('siswa-list')
                                 <a class="dropdown-item" href="{{ route('siswas.index') }}">
                                     Manage Siswa
                                 </a>
+                                @endcan
                             </div>
                             {{-- end --}}
 

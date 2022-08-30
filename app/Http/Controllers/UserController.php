@@ -11,6 +11,13 @@ use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -102,9 +109,9 @@ class UserController extends Controller
         //
         $this->validate($request, [
             'name' => 'required|min:2',
-            'email' => 'required|email|unique:users, email',
+            'email' => 'required|email|unique:users,email, ' . $id,
             'username' => 'required|min:2',
-            'password' => 'required|sam:confirm-password',
+            'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
 

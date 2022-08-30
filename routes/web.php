@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\NotesController;
@@ -29,7 +30,7 @@ Auth::routes(['register' => false, 'reset' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
-    // Route::resource('roles', RoleController::class);
+    Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('kelas', KelasController::class)->except(['show']);
     Route::resource('tahunajaran', TahunAjaranController::class)->except(['show']);

@@ -12,7 +12,9 @@
             <h2>Class Management</h2>
         </div>
         <div class="pull-right mb-2">
+          @can('kelas-create')
             <a class="btn btn-success" href="{{ route('kelas.create') }}"> Create New Class</a>
+            @endcan
         </div>
     </div>
 </div>
@@ -44,12 +46,17 @@
                <td><strong>Belum Ada Tahun Ajaran</strong></td>
        @endif
        <td>
-        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('kelas.destroy', $kelas->id) }}" method="POST">
-             <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-md btn-primary">Edit</a>
+        @can('kelas-edit')
+         <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-md btn-primary">Edit</a>
+        @endcan
+
+        @can('kelas-delete')
+         <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('kelas.destroy', $kelas->id) }}" method="POST">
          @csrf
          @method('DELETE')
          <button type="submit" class="btn btn-md btn-danger">Hapus</button>
        </form>
+       @endcan
      </td>
      </tr>
      @empty

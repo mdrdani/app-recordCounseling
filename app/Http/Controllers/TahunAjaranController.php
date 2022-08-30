@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class TahunAjaranController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:tahunajaran-list|tahunajaran-create|tahunajaran-edit|tahunajaran-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:tahunajaran-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:tahunajaran-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:tahunajaran-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
