@@ -63,8 +63,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Confirm Password:</strong>
-                <input type="password" name="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="Konfirmasi Password">
-                @error('confirm_password')
+                <input type="password" name="confirm-password" class="form-control @error('confirm-password') is-invalid @enderror" placeholder="Konfirmasi Password">
+                @error('confirm-password')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
                         </div>

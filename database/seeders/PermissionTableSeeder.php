@@ -16,35 +16,41 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         //
-        $permissions = [
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'kelas-list',
-            'kelas-create',
-            'kelas-edit',
-            'kelas-delete',
-            'note-list',
-            'note-create',
-            'note-edit',
-            'note-delete',
-            'siswa-list',
-            'siswa-create',
-            'siswa-edit',
-            'siswa-delete',
-            'tahunajaran-list',
-            'tahunajaran-create',
-            'tahunajaran-edit',
-            'tahunajaran-delete'
-        ];
 
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
-        }
+        // permission role
+        Permission::create(['name' => 'role-list', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role-create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role-edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'role-delete', 'guard_name' => 'web']);
+
+        // permission users
+        Permission::create(['name' => 'user-list', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user-create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user-edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'user-delete', 'guard_name' => 'web']);
+
+        // permission tahun ajaran
+        Permission::create(['name' => 'tahunajaran-list', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tahunajaran-create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tahunajaran-edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tahunajaran-delete', 'guard_name' => 'web']);
+
+        // permission siswa
+        Permission::create(['name' => 'siswa-list', 'guard_name' => 'web']);
+        Permission::create(['name' => 'siswa-create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'siswa-edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'siswa-delete', 'guard_name' => 'web']);
+
+        // permission note
+        Permission::create(['name' => 'note-list', 'guard_name' => 'web']);
+        Permission::create(['name' => 'note-create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'note-edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'note-delete', 'guard_name' => 'web']);
+
+        // permission kelas
+        Permission::create(['name' => 'kelas-list', 'guard_name' => 'web']);
+        Permission::create(['name' => 'kelas-create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'kelas-edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'kelas-delete', 'guard_name' => 'web']);
     }
 }

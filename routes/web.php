@@ -32,8 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('kelas', KelasController::class)->except(['show']);
-    Route::resource('tahunajaran', TahunAjaranController::class)->except(['show']);
+    Route::resource('kelas', KelasController::class);
+    Route::resource('tahunajaran', TahunAjaranController::class);
     Route::resource('siswas', SiswaController::class);
-    Route::resource('siswas/{id}/notes', NotesController::class)->except(['index']);
+    Route::resource('siswas/{id}/notes', NotesController::class);
 });

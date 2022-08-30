@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Role</h2>
+            <h2>Edit Role</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -20,7 +20,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $role->name) }}">
+                <!-- error message untuk title -->
+                @error('name')
+                <div class="alert alert-danger mt-2">
+                    {{ $message }}
+                </div>
+            @enderror
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

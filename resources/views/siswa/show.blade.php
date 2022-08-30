@@ -7,7 +7,9 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
             <a class="btn btn-primary mb-2" href="{{ route('siswas.index') }}"> Back</a>
+            @can('note-create')
             <a class="btn btn-success mb-2" href="{{ route('notes.create', $siswa->id) }}"> Buat Laporan Konseling</a>
+            @endcan
         </div>
     </div>
 </div>

@@ -59,7 +59,7 @@
  @endforelse
   </tbody>
 </table>
-{{ $users->links() }}
+{{ $roles->links() }}
 @endsection 
 
 @section('scripts')

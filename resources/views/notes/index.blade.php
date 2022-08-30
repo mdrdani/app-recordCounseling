@@ -15,7 +15,9 @@
       <h5>{!! $note->masalah !!}</h5> 
       <span>Dibuat Tanggal : {{ Carbon\Carbon::parse($note->created_at)->format('d M Y H:i') }} WIB<br> Oleh : {{ $note->User->name }} </span>
       <br>
+      @can('note-list')
       <a href="{{ route('notes.show', ['id' => $note->siswa_id, 'note' => $note->id]) }}" class="btn btn-info btn-md mb-4">Detail Laporan</a>
+      @endcan
         @endforeach
     </div>
 </div>
