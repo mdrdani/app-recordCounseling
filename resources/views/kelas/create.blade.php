@@ -38,6 +38,11 @@
                 <option value="{{$user->id}}">{{$user->name}}</option>
               @endforeach
             </select>
+            @error('user_id')
+                <div class="alert alert-danger mt-2">
+                    {{ $message }}
+                </div>
+            @enderror
       </div>
   </div>
 
@@ -50,10 +55,16 @@
                 <option value="{{$tahun->id}}">{{$tahun->tahun}}</option>
               @endforeach
             </select>
+            <!-- error message untuk title -->
+            @error('tahunajaran_id')
+                    <div class="alert alert-danger mt-2">
+                        {{ $message }}
+                    </div>
+            @enderror
       </div>
   </div>
   
-  <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
       <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </div>

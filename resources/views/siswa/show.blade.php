@@ -73,14 +73,22 @@
                           {{ Carbon\Carbon::parse($siswa->tanggal_lahir)->format('d M Y') }}
                         </div>
                       </div>
-
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Umur</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{ Carbon\Carbon::parse($siswa->tanggal_lahir)->age }} Tahun
+                        </div>
+                      </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
                           <h6 class="mb-0">Dibuat :</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ Carbon\Carbon::parse($siswa->created_at)->format('d M Y H:i') }}
+                          {{ Carbon\Carbon::parse($siswa->created_at)->format('d M Y H:i') }} WIB
                         </div>
                       </div>
                     </div>
