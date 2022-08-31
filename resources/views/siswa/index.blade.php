@@ -11,7 +11,9 @@
             <h2>Siswa Management</h2>
         </div>
         <div class="pull-right mb-2">
+            @can('siswa-create')
             <a class="btn btn-success" href="{{ route('siswas.create') }}"> Create New Siswa</a>
+            @endcan
         </div>
     </div>
 </div>
@@ -37,13 +39,19 @@
     <td>{{ $siswa->Kelas->User->name }}</td>
     <td>{{ $siswa->Kelas->TahunAjaran->tahun }}</td>
     <td>
-       <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('siswas.destroy', $siswa->id) }}" method="POST">
-            <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Show Record</a>
-            <a href="{{ route('siswas.edit', $siswa->id) }}" class="btn btn-md btn-primary">Edit</a>
+        <div class="btn-group" role="group" aria-label="Basic Example">
+        <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Show Record</a>
+        @can('siswa-edit')
+        <a href="{{ route('siswas.edit', $siswa->id) }}" class="btn btn-md btn-primary">Edit</a>
+        @endcan
+        @can('siswa-delete')
+        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('siswas.destroy', $siswa->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
       </form>
+      @endcan
+    </div>
     </td>
   </tr>
   @empty

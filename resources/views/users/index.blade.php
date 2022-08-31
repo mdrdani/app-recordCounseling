@@ -37,11 +37,12 @@
     <td>
       @if(!empty($user->getRoleNames()))
           @foreach($user->getRoleNames() as $val)
-                <span class="label label-success">{{ $val }}</span>
+                <label class="badge rounded-pill bg-primary">{{ $val }}</label>
           @endforeach
       @endif
     </td>
     <td>
+      <div class="btn-group" role="group" aria-label="Basic Example">
       @can('user-edit')
       <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>
       @endcan
@@ -61,6 +62,7 @@
         @endif
       </form>
       @endcan
+    </div>
     </td>
   </tr>
   @empty

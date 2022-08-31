@@ -11,7 +11,9 @@
             <h2>Tahun Ajaran Management</h2>
         </div>
         <div class="pull-right mb-2">
+            @can('tahunajaran-create')
             <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"> Create New Tahun Ajaran</a>
+            @endcan
         </div>
     </div>
 </div>
@@ -31,12 +33,19 @@
     <td><center>{{ ++$key }}</center></td>
     <td>{{ $tahun->tahun }}</td>
     <td>
-       <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST">
-            <a href="{{ route('tahunajaran.edit', $tahun->id) }}" class="btn btn-md btn-primary">Edit</a>
+        <div class="btn-group" role="group" aria-label="Basic Example">
+            @can('tahunajaran-edit')
+        <a href="{{ route('tahunajaran.edit', $tahun->id) }}" class="btn btn-md btn-primary">Edit</a>
+        @endcan
+
+        @can('tahunajaran-delete')
+        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
       </form>
+      @endcan
+    </div>
     </td>
   </tr>
   @empty

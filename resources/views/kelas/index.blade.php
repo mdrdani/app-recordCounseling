@@ -46,6 +46,7 @@
                <td><strong>Belum Ada Tahun Ajaran</strong></td>
        @endif
        <td>
+        <div class="btn-group" role="group" aria-label="Basic Example">
         @can('kelas-edit')
          <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-md btn-primary">Edit</a>
         @endcan
@@ -57,6 +58,7 @@
          <button type="submit" class="btn btn-md btn-danger">Hapus</button>
        </form>
        @endcan
+      </div>
      </td>
      </tr>
      @empty

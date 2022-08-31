@@ -32,6 +32,7 @@
     <td>{{ ++$key }}</td>
     <td>{{ $role->name }}</td>
     <td>
+      <div class="btn-group" role="group" aria-label="Basic Example">
         @can('role-edit')
         <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-md btn-primary">Edit</a>
         @endcan
@@ -42,14 +43,10 @@
         <form action="{{ route('roles.destroy', $role->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
         @csrf
         @method('DELETE')
-        @if(Auth::user() == TRUE)
-                <button type="submit" class="btn btn-md btn-danger" disabled>Hapus</button>
-          @else
         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
-        @endif
         @endcan
-      
       </form>
+    </div>
     </td>
   </tr>
   @empty
