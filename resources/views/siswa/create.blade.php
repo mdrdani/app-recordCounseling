@@ -70,11 +70,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Kelas</strong>
-                <select name="kelas_id" id="kelas_id" class="form-control @error('kelas_id') is-invalid @enderror">
-                    <option value="">Pilih Kelas</option>
-                    @foreach ($kelas as $k)
-                      <option value="{{$k->id}}">{{$k->name}}</option>
-                    @endforeach
+                <select name="kelas_id" id="kelas_id" class="js-example-basic-single js-states form-control @error('kelas_id') is-invalid @enderror">
                   </select>
 
                   <!-- error message untuk title -->
@@ -98,6 +94,8 @@
 <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $( document ).ready(function() {     
 $("#from-datepicker").datepicker({          
@@ -106,5 +104,18 @@ $("#from-datepicker").datepicker({
         autoclose: true
 });      
 });  
+</script>
+
+<script>
+    $('#kelas_id').select2({
+        ajax: {
+            url : '/ajax/siswa/search',
+            processResults: function(data) {
+                return {
+                    results: data.map(function(item) {return {id: item.id, text:item.name}})
+                }
+            }
+        }
+    });
 </script>
 @endsection

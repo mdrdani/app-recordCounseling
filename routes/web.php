@@ -37,7 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('kelas', KelasController::class);
+    Route::get('/ajax/kelas/search', [KelasController::class, 'ajaxSearch']);
     Route::resource('tahunajaran', TahunAjaranController::class);
     Route::resource('siswas', SiswaController::class);
+    Route::get('/ajax/siswa/search', [SiswaController::class, 'ajaxSearchKelas']);
     Route::resource('siswas/{id}/notes', NotesController::class);
 });

@@ -17,8 +17,8 @@
 <form action="{{ route('kelas.store') }}" method="POST">
 @csrf
 <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12">
-    <label class="font-weight-bold">Nama Kelas</label>
+  <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
+    <strong>Nama Kelas:</strong>
     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Kelas" autocomplete="off">
 
     <!-- error message untuk title -->
@@ -29,14 +29,10 @@
     @enderror
   </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
       <div class="form-group">
           <strong>Wali Kelas:</strong>
-          <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
-              <option value="">Pilih Wali Kelas</option>
-              @foreach ($users as $user)
-                <option value="{{$user->id}}">{{$user->name}}</option>
-              @endforeach
+          <select name="user_id" id="user_id" class="js-example-basic-single form-control @error('user_id') is-invalid @enderror">
             </select>
             @error('user_id')
                 <div class="alert alert-danger mt-2">
@@ -46,7 +42,7 @@
       </div>
   </div>
 
-  <div class="col-xs-12 col-sm-12 col-md-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
       <div class="form-group">
           <strong>Tahun Ajaran:</strong>
           <select name="tahunajaran_id" id="tahunajaran_id" class="form-control @error('tahunajaran_id') is-invalid @enderror">
@@ -69,4 +65,23 @@
   </div>
 </div>
 </form>
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $('#user_id').select2({
+        placeholder: 'Cari Nama Wali Kelas',
+        ajax: {
+            url : '/ajax/kelas/search',
+            processResults: function(data) {
+                return {
+                    results: data.map(function(item) {return {id: item.id, text:item.name}})
+                }
+            }
+        }
+    });
+</script>
 @endsection

@@ -133,4 +133,12 @@ class KelasController extends Controller
         Kelas::find($id)->delete();
         return redirect()->route('kelas.index')->with(['success' => 'Class Deleted Successfully']);
     }
+
+    public function ajaxSearch(Request $request)
+    {
+        $keyword = $request->get("q");
+        $user = User::where("name", "LIKE", "%$keyword%")->get();
+
+        return $user;
+    }
 }

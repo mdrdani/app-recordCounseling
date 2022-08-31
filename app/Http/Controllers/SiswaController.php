@@ -139,4 +139,12 @@ class SiswaController extends Controller
 
         return redirect()->route('siswas.index')->with(['success' => "Data Berhasil dihapus"]);
     }
+
+    public function ajaxSearchKelas(Request $request)
+    {
+        $keyword = $request->get("q");
+        $kelas = Kelas::where("name", "LIKE", "%$keyword%")->get();
+
+        return $kelas;
+    }
 }
