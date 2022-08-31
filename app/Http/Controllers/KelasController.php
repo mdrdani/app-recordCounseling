@@ -37,7 +37,10 @@ class KelasController extends Controller
     public function create()
     {
         //
-        $users = User::all();
+        // $users = User::all();
+        $users = User::whereHas('roles', function ($subQuery) {
+            $subQuery->where('name', 'guru');
+        })->get();
         $tahun_ajarans = TahunAjaran::all();
         return view('kelas.create', compact('users', 'tahun_ajarans'));
     }
