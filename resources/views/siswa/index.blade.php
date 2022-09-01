@@ -15,6 +15,26 @@
             <a class="btn btn-success" href="{{ route('siswas.create') }}"> Create New Siswa</a>
             @endcan
         </div>
+
+        <form action="{{route('siswas.index')}}">
+
+            <div class="input-group">
+                <input 
+                  type="text" 
+                  class="form-control mb-2" 
+                  placeholder="Cari Berdasarkan Nama Siswa"
+                  value="{{Request::get('name')}}"
+                  name="name" autocomplete="off">
+                  
+                <div class="input-group-append">
+                  <input 
+                    type="submit" 
+                    value="Filter" 
+                    class="btn btn-primary">
+                </div>
+            </div>
+              
+          </form>
     </div>
 </div>
 
@@ -40,7 +60,7 @@
     <td>{{ $siswa->Kelas->TahunAjaran->tahun }}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic Example">
-        <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Show Record</a>
+        <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Lihat Catatan</a>
         @can('siswa-edit')
         <a href="{{ route('siswas.edit', $siswa->id) }}" class="btn btn-md btn-primary">Edit</a>
         @endcan
@@ -56,7 +76,7 @@
   </tr>
   @empty
   <div class="alert alert-danger">
-    Data Siswa Belum Tersedia
+    Data Siswa Tidak Ada
   </div>
  @endforelse
  </tbody>

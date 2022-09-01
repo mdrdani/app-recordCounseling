@@ -16,6 +16,26 @@
             <a class="btn btn-success" href="{{ route('kelas.create') }}"> Create New Class</a>
             @endcan
         </div>
+        <form action="{{route('kelas.index')}}">
+
+          <div class="input-group mb-2">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Cari Berdasarkan Nama Kelas"
+                value="{{Request::get('name')}}"
+                name="name"
+                autocomplete="off">
+                
+              <div class="input-group-append">
+                <input 
+                  type="submit" 
+                  value="Filter" 
+                  class="btn btn-primary">
+              </div>
+          </div>
+            
+        </form>
     </div>
 </div>
 
@@ -63,7 +83,7 @@
      </tr>
      @empty
      <div class="alert alert-danger">
-       Data Kelas Belum Tersedia
+       Data Kelas Tidak Ada
      </div>
     @endforelse
   </tbody>

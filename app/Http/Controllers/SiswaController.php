@@ -21,10 +21,16 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $siswas = Siswa::latest()->paginate(10);
+        $filterKeyword = $request->get('name');
+
+        if ($filterKeyword) {
+            $siswas = Siswa::where("name", "LIKE", "%$filterKeyword%")->paginate(10);
+        }
+
         return view('siswa.index', compact('siswas'));
     }
 

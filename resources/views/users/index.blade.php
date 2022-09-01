@@ -13,65 +13,83 @@
         @can('user-create')
         <div class="pull-right mb-2">
             <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-        </div>
+          </div>
         @endcan
+
+        <form action="{{route('users.index')}}">
+
+          <div class="input-group">
+              <input 
+                type="text" 
+                class="form-control mb-2" 
+                placeholder="Cari Berdasarkan Nama"
+                value="{{Request::get('name')}}"
+                name="name" autocomplete="off">
+                
+              <div class="input-group-append">
+                <input 
+                  type="submit" 
+                  value="Filter" 
+                  class="btn btn-primary">
+              </div>
+          </div>
+            
+        </form>
     </div>
 </div>
 
-<table class="table table-bordered">
-  <thead>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Roles</th>
+        <th width="280px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @forelse($users as $key => $user)
     <tr>
-      <th>No</th>
-      <th>Name</th>
-      <th>Username</th>
-      <th>Roles</th>
-      <th width="280px">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    @forelse($users as $key => $user)
-  <tr>
-    <td>{{ ++$key }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->username}}</td>
-    <td>
-      @if(!empty($user->getRoleNames()))
-          @foreach($user->getRoleNames() as $val)
-                <label class="badge rounded-pill bg-primary">{{ $val }}</label>
-          @endforeach
-      @endif
-    </td>
-    <td>
-      <div class="btn-group" role="group" aria-label="Basic Example">
-      @can('user-edit')
-      <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>
-      @endcan
-
-      @can('user-list')
-      <a href="{{ route('users.show', $user->id) }}" class="btn btn-md btn-warning">Show</a>
-      @endcan
-
-      @can('user-delete')
-      <form action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
-        @csrf
-        @method('DELETE')
-        @if(Auth::user() == TRUE)
-                <button type="submit" class="btn btn-md btn-danger" disabled>Hapus</button>
-          @else
-        <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+      <td>{{ ++$key }}</td>
+      <td>{{ $user->name }}</td>
+      <td>{{ $user->username}}</td>
+      <td>
+        @if(!empty($user->getRoleNames()))
+            @foreach($user->getRoleNames() as $val)
+                  <label class="badge rounded-pill bg-primary">{{ $val }}</label>
+            @endforeach
         @endif
-      </form>
-      @endcan
+      </td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic Example">
+        @can('user-edit')
+        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>
+        @endcan
+  
+        @can('user-list')
+        <a href="{{ route('users.show', $user->id) }}" class="btn btn-md btn-warning">Show</a>
+        @endcan
+  
+        @can('user-delete')
+        <form action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
+          @csrf
+          @method('DELETE')
+            <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+        </form>
+        @endcan
+      </div>
+      </td>
+    </tr>
+    @empty
+    <div class="alert alert-danger">
+      Data User Tidak Ada
     </div>
-    </td>
-  </tr>
-  @empty
-  <div class="alert alert-danger">
-    Data User Belum tersedia
-  </div>
- @endforelse
-  </tbody>
-</table>
+   @endforelse
+    </tbody>
+  </table>
+</div>
 {{ $users->links() }}
 @endsection 
 

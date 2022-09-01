@@ -22,10 +22,15 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $kelass = Kelas::orderBy('id', 'ASC')->paginate(6);
+        $filterKeyword = $request->get('name');
+
+        if ($filterKeyword) {
+            $kelass = Kelas::where("name", "LIKE", "%$filterKeyword%")->paginate(6);
+        }
         return view('kelas.index', compact('kelass'));
     }
 
@@ -137,7 +142,9 @@ class KelasController extends Controller
     public function ajaxSearch(Request $request)
     {
         $keyword = $request->get("q");
-        $user = User::where("name", "LIKE", "%$keyword%")->get();
+        $user = User::where("name", "LIKE", "%$keyword%")->whereHas('roles', function ($subQuery) {
+            $subQuery->where('name', 'guru');
+        })->get();
 
         return $user;
     }
