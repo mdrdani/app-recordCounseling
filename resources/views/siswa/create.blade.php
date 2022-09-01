@@ -39,6 +39,12 @@
             <div class="form-group">
                 <strong>Nomor Induk Siswa</strong>
                 <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off">
+                <!-- error message untuk title -->
+                @error('nis')
+                <div class="alert alert-danger mt-2">
+                    {{ $message }}
+                </div>
+            @enderror
             </div>
         </div>
 

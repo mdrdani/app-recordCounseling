@@ -13,10 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('notes', function (Blueprint $table) {
-            //
+        Schema::create('notes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('siswa_id');
             $table->unsignedBigInteger('user_id');
+            $table->date('tanggal');
+            $table->longText('masalah');
+            $table->longText('penanganan')->nullable();
+            $table->string('foto')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+
+
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
         });
     }
 
@@ -27,9 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('notes', function (Blueprint $table) {
-            //
-            $table->dropForeign('user_id');
-        });
+        Schema::dropIfExists('notes');
     }
 };
