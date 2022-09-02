@@ -103,10 +103,11 @@ class TahunAjaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TahunAjaran $tahunajaran)
+    public function destroy($id)
     {
         //
 
+        $tahunajaran = TahunAjaran::findOrFail($id);
         $tahunajaran->delete();
 
         return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dihapus!']);

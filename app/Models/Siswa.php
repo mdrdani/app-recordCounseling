@@ -26,6 +26,6 @@ class Siswa extends Model
 
     public function Notes()
     {
-        return $this->hasMany(Note::class);
+        return $this->hasMany(Note::class, 'siswa_id', 'id');
     }
 }

@@ -16,14 +16,10 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('tahunajaran_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('tahunajaran_id')->constrained('tahun_ajarans')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
-
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('tahunajaran_id')->references('id')->on('tahun_ajarans')->onDelete('cascade');
         });
     }
 
