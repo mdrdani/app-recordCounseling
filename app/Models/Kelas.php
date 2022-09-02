@@ -26,6 +26,16 @@ class Kelas extends Model
 
     public function Siswa()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->hasMany(Siswa::class, 'kelas_id', 'id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($kelas) {
+            $kelas->Siswa()->each(function ($siswa) {
+                $siswa->delete();
+            });
+        });
     }
 }

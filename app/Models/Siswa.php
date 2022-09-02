@@ -26,6 +26,16 @@ class Siswa extends Model
 
     public function Notes()
     {
-        return $this->hasMany(Note::class);
+        return $this->hasMany(Note::class, 'siswa_id', 'id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($siswa) {
+            $siswa->Notes()->each(function ($note) {
+                $note->delete();
+            });
+        });
     }
 }
