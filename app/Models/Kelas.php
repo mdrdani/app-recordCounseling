@@ -28,4 +28,14 @@ class Kelas extends Model
     {
         return $this->hasMany(Siswa::class, 'kelas_id', 'id');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($kelas) {
+            $kelas->Siswa()->each(function ($siswa) {
+                $siswa->delete();
+            });
+        });
+    }
 }

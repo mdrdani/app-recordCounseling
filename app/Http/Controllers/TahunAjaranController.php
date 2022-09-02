@@ -22,7 +22,7 @@ class TahunAjaranController extends Controller
     public function index()
     {
         //
-        $tahunajarans = TahunAjaran::orderBy('id', 'DESC')->paginate(5);
+        $tahunajarans = TahunAjaran::orderBy('id', 'DESC')->withTrashed()->paginate(5);
         return view('tahunajaran.index', compact('tahunajarans'));
     }
 

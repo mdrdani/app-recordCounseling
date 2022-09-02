@@ -19,4 +19,14 @@ class TahunAjaran extends Model
     {
         return $this->hasMany(Kelas::class, 'tahunajaran_id', 'id');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($tahunajaran) {
+            $tahunajaran->Kelas()->each(function ($kelas) {
+                $kelas->delete();
+            });
+        });
+    }
 }

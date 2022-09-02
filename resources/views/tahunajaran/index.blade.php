@@ -34,17 +34,25 @@
     <td>{{ $tahun->tahun }}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic Example">
-            @can('tahunajaran-edit')
+        @if($tahun->deleted_at == NULL)
+        @can('tahunajaran-edit')
         <a href="{{ route('tahunajaran.edit', $tahun->id) }}" class="btn btn-md btn-primary">Edit</a>
         @endcan
+        @endif
+            
 
+        @if($tahun->deleted_at == NULL)
         @can('tahunajaran-delete')
         <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+        <button type="submit" class="btn btn-md btn-danger">NonAktifkan</button>
       </form>
       @endcan
+      @else
+      <button type="submit" class="btn btn-md btn-warning">Aktifkan</button>
+      @endif
+
     </div>
     </td>
   </tr>
