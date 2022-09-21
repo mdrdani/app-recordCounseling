@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('nis')->unique()->nullable();
             $table->string('jenis_kelamin');
             $table->date('tanggal_lahir')->nullable();
-            $table->foreignId('kelas_id')->constrained('kelas')->cascadeOnDelete();
+            $table->foreignId('kelas_id')->constrained('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });

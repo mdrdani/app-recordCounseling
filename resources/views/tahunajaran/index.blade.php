@@ -43,14 +43,17 @@
 
         @if($tahun->deleted_at == NULL)
         @can('tahunajaran-delete')
-        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST">
+        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST" class="d-inline">
         @csrf
-        @method('DELETE')
         <button type="submit" class="btn btn-md btn-danger">NonAktifkan</button>
+        @method('DELETE')
       </form>
       @endcan
       @else
-      <button type="submit" class="btn btn-md btn-warning">Aktifkan</button>
+      <form action="{{ route('tahunajaran.restore', $tahun->id) }}" method="POST" class="d-inline">
+        @csrf
+          <input type="submit" value="Aktifkan" class="btn btn-md btn-warning">
+      </form>
       @endif
 
     </div>

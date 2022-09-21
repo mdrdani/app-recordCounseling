@@ -7,6 +7,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Models\TahunAjaran;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,21 @@ Auth::routes(['register' => false, 'reset' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+    // route roles
     Route::resource('roles', RoleController::class);
+
+    // route user
     Route::resource('users', UserController::class);
+
+    // route kelas
     Route::resource('kelas', KelasController::class);
     Route::get('/ajax/kelas/search', [KelasController::class, 'ajaxSearch']);
+
+    // route tahun ajaran
+    Route::post('tahunajaran/{id}/restore', [TahunAjaranController::class, 'restore'])->name('tahunajaran.restore');
     Route::resource('tahunajaran', TahunAjaranController::class);
+
+    // route siswa
     Route::resource('siswas', SiswaController::class);
     Route::get('/ajax/siswa/search', [SiswaController::class, 'ajaxSearchKelas']);
     Route::resource('siswas/{id}/notes', NotesController::class);
