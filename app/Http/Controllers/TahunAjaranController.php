@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TahunAjaranController extends Controller
 {
+
     function __construct()
     {
         $this->middleware('permission:tahunajaran-list|tahunajaran-create|tahunajaran-edit|tahunajaran-delete', ['only' => ['index', 'show']]);
@@ -14,6 +15,7 @@ class TahunAjaranController extends Controller
         $this->middleware('permission:tahunajaran-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:tahunajaran-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -110,6 +112,18 @@ class TahunAjaranController extends Controller
         $tahunajaran = TahunAjaran::findOrFail($id);
         $tahunajaran->delete();
 
-        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Di Nonaktifkan!']);
+    }
+
+    public function restore($id)
+    {
+        $tahunajaran = TahunAjaran::withTrashed()->findOrFail($id);
+
+        if ($tahunajaran->trashed()) {
+            $tahunajaran->restore();
+            return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil di restore']);
+        } else {
+            return redirect()->route('tahunajaran.index')->with(['error' => 'Data Gagal direstore']);
+        }
     }
 }

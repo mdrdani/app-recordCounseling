@@ -13,6 +13,7 @@ class Kelas extends Model
 
     protected $fillable = [
         'name',
+        'deleted_at'
     ];
 
     public function TahunAjaran()
@@ -32,9 +33,16 @@ class Kelas extends Model
     public static function boot()
     {
         parent::boot();
-        self::deleting(function ($kelas) {
+
+        static::deleted(function ($kelas) {
             $kelas->Siswa()->each(function ($siswa) {
                 $siswa->delete();
+            });
+        });
+
+        static::restoring(function ($kelas) {
+            $kelas->Siswa()->onlyTrashed()->where('deleted_at', '>=', $kelas->deleted_at)->get()->each(function ($siswa) {
+                $siswa->restore();
             });
         });
     }

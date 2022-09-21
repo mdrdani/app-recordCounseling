@@ -16,7 +16,8 @@ class Siswa extends Model
         'name',
         'nis',
         'jenis_kelamin',
-        'tanggal_lahir'
+        'tanggal_lahir',
+        'deleted_at'
     ];
 
     public function Kelas()
@@ -32,9 +33,16 @@ class Siswa extends Model
     public static function boot()
     {
         parent::boot();
-        self::deleting(function ($siswa) {
+
+        static::deleted(function ($siswa) {
             $siswa->Notes()->each(function ($note) {
                 $note->delete();
+            });
+        });
+
+        static::restoring(function ($siswa) {
+            $siswa->Notes()->onlyTrashed()->where('deleted_at', '>=', $siswa->deleted_at)->get()->each(function ($note) {
+                $note->restore();
             });
         });
     }

@@ -12,7 +12,8 @@ class TahunAjaran extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'tahun'
+        'tahun',
+        'deleted_at'
     ];
 
     public function Kelas()
@@ -23,10 +24,27 @@ class TahunAjaran extends Model
     public static function boot()
     {
         parent::boot();
-        self::deleting(function ($tahunajaran) {
+
+        static::deleted(function ($tahunajaran) {
             $tahunajaran->Kelas()->each(function ($kelas) {
                 $kelas->delete();
             });
         });
+
+        // static::restoring(function ($tahunajaran) {
+        //     $tahunajaran->Kelas()->withTrashed()->where('deleted_at', '>=', $tahunajaran->deleted_at)->restore();
+        // });
+
+        static::restoring(function ($tahunajaran) {
+            $tahunajaran->Kelas()->onlyTrashed()->where('deleted_at', '>=', $tahunajaran->deleted_at)->get()->each(function ($kelas) {
+                $kelas->restore();
+            });
+        });
+
+        // static::restoring(function ($tahunajaran) {
+        //     $tahunajaran->Kelas()->each(function ($tahunajaran) {
+        //         $tahunajaran->restore();
+        //     });
+        // });
     }
 }
