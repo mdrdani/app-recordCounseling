@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use App\Models\Kelas;
+use App\Models\LogSiswa;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
@@ -72,6 +74,13 @@ class SiswaController extends Controller
         $siswa->kelas_id = $request->kelas_id;
         $siswa->save();
 
+        // log data Siswa
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->siswa_id = $siswa->id;
+        $log->method = 'Membuat Siswa Baru';
+        $log->save();
+
         return redirect()->route('siswas.index')->with(['success' => 'Data berhasil di buat']);
     }
 
@@ -129,6 +138,14 @@ class SiswaController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'kelas_id' => $request->kelas_id
         ]);
+
+        // log data siswa
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->siswa_id = $siswa->id;
+        $log->method = 'Perbarui Data Siswa';
+        $log->save();
+
         return redirect()->route('siswas.index')->with(['success' => 'Data Berhasil diupdate']);
     }
 
@@ -142,6 +159,13 @@ class SiswaController extends Controller
     {
         //
         $siswa->delete();
+
+        // log data siswa
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->siswa_id = $siswa->id;
+        $log->method = 'Menghapus Data Siswa';
+        $log->save();
 
         return redirect()->route('siswas.index')->with(['success' => "Data Berhasil dihapus"]);
     }
