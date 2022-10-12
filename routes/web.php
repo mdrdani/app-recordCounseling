@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
 
     // route user
+    Route::get('users/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('users/profile/{user}', [UserController::class, 'updateProfile'])->name('user.updateProfile');
     Route::resource('users', UserController::class);
 
     // route kelas
