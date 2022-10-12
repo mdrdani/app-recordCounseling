@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogSiswa;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TahunAjaranController extends Controller
 {
@@ -54,6 +56,12 @@ class TahunAjaranController extends Controller
 
         $tahunajaran->create($request->all());
 
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Membuat Tahun Ajaran Baru';
+        $log->save();
+
         return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Dibuat!']);
     }
 
@@ -95,6 +103,11 @@ class TahunAjaranController extends Controller
         ]);
 
         $tahunajaran->update($request->all());
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Perbarui Tahun Ajaran';
+        $log->save();
 
         return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
@@ -111,6 +124,12 @@ class TahunAjaranController extends Controller
 
         $tahunajaran = TahunAjaran::findOrFail($id);
         $tahunajaran->delete();
+
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Menghapus Tahun Ajaran';
+        $log->save();
 
         return redirect()->route('tahunajaran.index')->with(['success' => 'Data Berhasil Di Nonaktifkan!']);
     }

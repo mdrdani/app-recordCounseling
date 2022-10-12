@@ -12,4 +12,14 @@ class LogSiswa extends Model
     protected $fillable = [
         'user_id', 'siswa_id', 'method'
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function Siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id')->withTrashed();
+    }
 }
