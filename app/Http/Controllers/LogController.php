@@ -16,7 +16,7 @@ class LogController extends Controller
     public function index()
     {
         // $logs = LogSiswa::latest()->paginate(15);
-        $logs = LogSiswa::orderBy('id', 'DESC')->withTrashed()->paginate(15);
+        $logs = LogSiswa::latest()->paginate(15);
 
         return view('log.index', compact('logs'));
     }
