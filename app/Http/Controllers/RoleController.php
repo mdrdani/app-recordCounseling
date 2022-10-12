@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogSiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -56,6 +58,12 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
+
+        // log notes
+        $log = new LogSiswa();
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Membuat Roles Baru';
+        $log->save();
 
         return redirect()->route('roles.index')->with(['success' => 'Data sudah dibuat']);
     }
@@ -115,6 +123,12 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->save();
 
+        // log notes
+        $log = new LogSiswa();
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Perbarui Data Roles';
+        $log->save();
+
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')->with(['success' => 'Data Berhasil diUpdate']);
@@ -130,6 +144,11 @@ class RoleController extends Controller
     {
         //
         DB::table("roles")->where('id', $id)->delete();
+        // log notes
+        $log = new LogSiswa();
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Menghapus Role';
+        $log->save();
         return redirect()->route('roles.index')->with(['success' => 'Data Berhasil di hapus']);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LogNote;
+use App\Models\LogSiswa;
 use App\Models\Note;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -80,7 +80,7 @@ class NotesController extends Controller
         }
 
         // log notes
-        $log = new LogNote();
+        $log = new LogSiswa();
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $request->siswa_id;
         $log->method = 'Membuat Notes Baru';
@@ -158,7 +158,7 @@ class NotesController extends Controller
         }
 
         // log notes
-        $log = new LogNote();
+        $log = new LogSiswa();
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $request->siswa_id;
         $log->method = 'Perbarui Data Notes';

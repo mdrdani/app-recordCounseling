@@ -22,7 +22,7 @@ class AdminUserSeeder extends Seeder
             'name'      => 'Administrator',
             'email'     => 'admin@gmail.com',
             'username' => 'admin',
-            'password'  => bcrypt('password'),
+            'password'  => bcrypt('secret123'),
         ]);
 
         //get all permissions

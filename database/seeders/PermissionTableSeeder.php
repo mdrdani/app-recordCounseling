@@ -52,5 +52,8 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['name' => 'kelas-create', 'guard_name' => 'web']);
         Permission::create(['name' => 'kelas-edit', 'guard_name' => 'web']);
         Permission::create(['name' => 'kelas-delete', 'guard_name' => 'web']);
+
+        // permission log
+        Permission::create(['name' => 'log-list', 'guard_name' => 'web']);
     }
 }

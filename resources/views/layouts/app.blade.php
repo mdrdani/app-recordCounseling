@@ -89,6 +89,12 @@
                                     Manage Siswa
                                 </a>
                                 @endcan
+
+                                @can('log-list')
+                                <a class="dropdown-item" href="{{ route('log.index') }}">
+                                    Activity Log
+                                </a>
+                                @endcan
                             </div>
                             {{-- end --}}
 

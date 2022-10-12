@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('log_siswas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('siswa_id');
+            $table->foreignId('siswa_id')->nullable();
             $table->string('method');
             $table->timestamps();
         });

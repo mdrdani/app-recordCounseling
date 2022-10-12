@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kelas;
+use App\Models\LogSiswa;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KelasController extends Controller
 {
@@ -72,6 +74,13 @@ class KelasController extends Controller
         $kelas->tahunajaran_id = $request->tahunajaran_id;
         $kelas->save();
 
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Membuat Kelas Baru';
+        $log->save();
+
+
         return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil dibuat']);
     }
 
@@ -123,6 +132,13 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         $kelas->update($input);
 
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Perbarui Kelas';
+        $log->save();
+
+
         return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Di Update']);
     }
 
@@ -136,6 +152,12 @@ class KelasController extends Controller
     {
         //
         Kelas::find($id)->delete();
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Menghapus Kelas';
+        $log->save();
+
         return redirect()->route('kelas.index')->with(['success' => 'Class Deleted Successfully']);
     }
 
