@@ -61,7 +61,7 @@
   </tr>
   @empty
   <div class="alert alert-danger">
-    Data Tahun Ajaran Belum Tersedia
+    Data Tahun Ajaran Masih Kosong
   </div>
  @endforelse
  </tbody>
