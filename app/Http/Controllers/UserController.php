@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Hash;
 use DB;
-use Spatie\Permission\Models\Role;
+use Hash;
+use App\Models\User;
+use App\Models\LogSiswa;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +20,7 @@ class UserController extends Controller
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -70,6 +73,12 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
+
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Membuat User Baru';
+        $log->save();
 
         return redirect()->route('users.index')->with(['success' => 'User created successfully']);
     }
@@ -134,6 +143,12 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
+        // log data
+        $log = new LogSiswa;
+        $log->user_id = Auth::user()->id;
+        $log->method = 'Perbarui Data User';
+        $log->save();
+
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully');
     }
@@ -150,5 +165,47 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('users.profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        if ($request->filled('oldpassword')) {
+            $request->validate([
+                'oldpassword' => 'required|min:3|max:255',
+                'password' => 'required|min:3|max:255',
+                'password_confirmation' => 'required_with:password|same:password|min:3|max:255'
+            ]);
+
+            $hashedPassword = Auth::user()->password;
+
+            if (\Hash::check($request->oldpassword, $hashedPassword)) {
+                if (!\Hash::check($request->password, $hashedPassword)) {
+                    $users = User::find(Auth::user()->id);
+                    $users->password = bcrypt($request->password);
+                    User::where('id', Auth::user()->id)->update(array('password' => $users->password));
+                    return redirect()->back()->with(['success' => 'Update Profile Success']);
+                } else {
+                    return redirect()->back()->with(['error' => 'Password baru tidak boleh sama dengan password lama!']);
+                }
+            } else {
+                return redirect()->back()->with(['error' => 'Password Lama Tidak sama']);
+            }
+        } else {
+            $request->validate([
+                'name' => 'min:3|string'
+            ]);
+
+            $user = User::findOrFail($id);
+            $user->name = $request->name;
+            $user->save();
+
+            return redirect()->back()->with(['success' => 'Update Profile Success']);
+        }
     }
 }
