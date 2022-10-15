@@ -78,7 +78,7 @@ class SiswaController extends Controller
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $siswa->id;
-        $log->method = 'Membuat Siswa Baru';
+        $log->method = 'Membuat Siswa Baru dengan Nama ' . $log->Siswa->name;
         $log->save();
 
         return redirect()->route('siswas.index')->with(['success' => 'Data berhasil di buat']);
@@ -143,7 +143,7 @@ class SiswaController extends Controller
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $siswa->id;
-        $log->method = 'Perbarui Data Siswa';
+        $log->method = 'Memperbarui Siswa Baru dengan Nama ' . $log->Siswa->name;
         $log->save();
 
         return redirect()->route('siswas.index')->with(['success' => 'Data Berhasil diupdate']);
