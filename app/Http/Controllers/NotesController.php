@@ -83,7 +83,7 @@ class NotesController extends Controller
         $log = new LogSiswa();
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $request->siswa_id;
-        $log->method = 'Membuat Notes Baru';
+        $log->method = 'Membuat Catatan Pada Siswa ' . $log->Siswa->name;
         $log->save();
 
         return redirect()->back()->with(['success' => 'Data Berhasil dibuat']);
@@ -161,7 +161,7 @@ class NotesController extends Controller
         $log = new LogSiswa();
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $request->siswa_id;
-        $log->method = 'Perbarui Data Notes';
+        $log->method = 'Memperbarui Catatan Pada Siswa ' . $log->Siswa->name;
         $log->save();
 
         return redirect()->back()->with(['success' => 'Data Berhasil diupdate']);

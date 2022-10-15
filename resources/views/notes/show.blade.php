@@ -68,7 +68,7 @@
                     <h6 class="mb-0">Dibuat :</h6>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    {{ Carbon\Carbon::parse($note->created_at)->format('d M Y H:i') }} WIB.  Oleh {{ $note->User->name }}
+                    {{ Carbon\Carbon::parse($note->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB.  Oleh {{ $note->User->name }}
                   </div>
                 </div>
 
@@ -78,7 +78,7 @@
                     <h6 class="mb-0">Diupdate :</h6>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    {{ Carbon\Carbon::parse($note->updated_at)->format('d M Y H:i') }} WIB
+                    {{ Carbon\Carbon::parse($note->updated_at)->translatedFormat('l, j F Y ; h:i a') }} WIB
                   </div>
                 </div>
 

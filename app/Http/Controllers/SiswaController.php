@@ -164,7 +164,7 @@ class SiswaController extends Controller
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $siswa->id;
-        $log->method = 'Menghapus Data Siswa';
+        $log->method = 'Menghapus Data Siswa ' . $log->Siswa->name;
         $log->save();
 
         return redirect()->route('siswas.index')->with(['success' => "Data Berhasil dihapus"]);

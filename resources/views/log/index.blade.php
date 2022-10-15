@@ -24,9 +24,9 @@
   @forelse ($logs as $key => $log)
   <tr>
     <td><center>{{ ++$key }}</center></td>
-    <td>{{ $log->User->name }}</td>
+    <td><strong>{{ $log->User->name }}</strong></td>
     <td><strong>{{ $log->method }}</strong></td>
-    <td>{{ Carbon\Carbon::parse($log->created_at)->format('d M Y H:i') }} WIB</td>
+    <td>{{ Carbon\Carbon::parse($log->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB</td>
     
   </tr>
   @empty
