@@ -13,7 +13,7 @@
         </div>
         <div class="pull-right mb-2">
           @can('kelas-create')
-            <a class="btn btn-success" href="{{ route('kelas.create') }}"> Create New Class</a>
+            <a class="btn btn-success" href="{{ route('kelas.create') }}"> Buat Kelas Baru</a>
             @endcan
         </div>
         <form action="{{route('kelas.index')}}">

@@ -27,11 +27,11 @@ class KelasController extends Controller
     public function index(Request $request)
     {
         //
-        $kelass = Kelas::orderBy('id', 'ASC')->paginate(6);
+        $kelass = Kelas::latest()->paginate(6);
         $filterKeyword = $request->get('name');
 
         if ($filterKeyword) {
-            $kelass = Kelas::where("name", "LIKE", "%$filterKeyword%")->paginate(6);
+            $kelass = Kelas::where("name", "LIKE", "%$filterKeyword%")->latest()->paginate(6);
         }
         return view('kelas.index', compact('kelass'));
     }
@@ -62,6 +62,7 @@ class KelasController extends Controller
     {
         //
         $this->validate($request, [
+            'jenjang' => 'required|string',
             'name' => 'required|string|min:3',
             'user_id' => 'required',
             'tahunajaran_id' => 'required'
@@ -69,6 +70,7 @@ class KelasController extends Controller
 
         $kelas = new Kelas;
         $kelas->id = $request->id;
+        $kelas->jenjang = $request->jenjang;
         $kelas->name = $request->name;
         $kelas->user_id = $request->user_id;
         $kelas->tahunajaran_id = $request->tahunajaran_id;
@@ -123,6 +125,7 @@ class KelasController extends Controller
     {
         //
         $this->validate($request, [
+            'jenjang' => 'required|string',
             'name' => 'required|string|min:3',
             'user_id' => 'required',
             'tahunajaran_id' => 'required'
