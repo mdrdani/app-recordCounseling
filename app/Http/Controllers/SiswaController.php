@@ -110,7 +110,7 @@ class SiswaController extends Controller
     {
         //
         $siswa = Siswa::findOrFail($id);
-        $kelas = Kelas::pluck('name', 'id');
+        $kelas = Kelas::all();
         return view('siswa.edit', compact('kelas', 'siswa'));
     }
 

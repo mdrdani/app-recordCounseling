@@ -12,7 +12,7 @@
         </div>
         <div class="pull-right mb-2">
             @can('siswa-create')
-            <a class="btn btn-success" href="{{ route('siswas.create') }}"> Create New Siswa</a>
+            <a class="btn btn-success" href="{{ route('siswas.create') }}"> Buat Siswa Baru</a>
             @endcan
         </div>
 

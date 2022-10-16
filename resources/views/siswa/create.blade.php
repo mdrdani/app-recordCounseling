@@ -10,10 +10,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Siswa</h2>
+            <h2>Buat Siswa Baru</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('siswas.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('siswas.index') }}"> Kembali</a>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Nama Siswa</strong>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukan Nama Siswa">
                             
                                 <!-- error message untuk title -->
                                 @error('name')
@@ -38,7 +38,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Nomor Induk Siswa</strong>
-                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off">
+                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off" placeholder="Masukan NIS">
                 <!-- error message untuk title -->
                 @error('nis')
                 <div class="alert alert-danger mt-2">
@@ -118,7 +118,7 @@ $("#from-datepicker").datepicker({
             url : '/ajax/siswa/search',
             processResults: function(data) {
                 return {
-                    results: data.map(function(item) {return {id: item.id, text:item.name}})
+                    results: data.map(function(item) {return {id: item.id,  text:item.name}})
                 }
             }
         }

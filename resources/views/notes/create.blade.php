@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create Catatan Konseling</h2>
+            <h2>Buat Catatan Konseling</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('siswas.show', $siswa->id) }}"> Kembali</a>

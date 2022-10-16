@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Class</h2>
+            <h2>Buat Kelas Baru</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('kelas.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('kelas.index') }}"> Kembali</a>
         </div>
     </div>
 </div>

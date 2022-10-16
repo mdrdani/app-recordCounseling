@@ -44,6 +44,7 @@
     <tr>
       <th>No</th>
       <th>Kelas</th>
+      <th>Jenjang</th>
       <th>Wali Kelas</th>
       <th>Tahun Ajaran</th>
       <th width="280px">Action</th>
@@ -54,6 +55,7 @@
      <tr>
        <td>{{ ++$key }}</td>
        <td>{{ $kelas->name }}</td>
+       <td>{{ $kelas->jenjang }}</td>
        @if($kelas->user_id != Null)
                <td>{{ $kelas->User->name}}</td>
        @else
