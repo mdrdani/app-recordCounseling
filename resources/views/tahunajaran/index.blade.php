@@ -43,7 +43,7 @@
 
         @if($tahun->deleted_at == NULL)
         @can('tahunajaran-delete')
-        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST" class="d-inline">
+        <form onsubmit="return confirm('Apakah Anda yakin? Pastikan Siswa Yang Masih Aktif Sudah Di pindahkan Kelasnya !!');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST" class="d-inline">
         @csrf
         <button type="submit" class="btn btn-md btn-danger">NonAktifkan</button>
         @method('DELETE')

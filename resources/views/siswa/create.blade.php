@@ -38,7 +38,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
             <div class="form-group">
                 <strong>Nomor Induk Siswa</strong>
-                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off" placeholder="Masukan NIS">
+                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" autocomplete="off" placeholder="Mohon Masukan NIS/NISN yang sesuai dengan Data Siswa">
                 <!-- error message untuk title -->
                 @error('nis')
                 <div class="alert alert-danger mt-2">

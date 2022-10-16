@@ -78,7 +78,7 @@ class SiswaController extends Controller
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $siswa->id;
-        $log->method = 'Membuat Siswa Baru dengan Nama ' . $log->Siswa->name;
+        $log->method = 'Membuat Siswa Baru  (' . $log->Siswa->name . ')';
         $log->save();
 
         return redirect()->route('siswas.index')->with(['success' => 'Data berhasil di buat']);
@@ -121,7 +121,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Siswa $siswa)
+    public function update(Request $request, $id)
     {
         //
         $this->validate($request, [
@@ -131,20 +131,22 @@ class SiswaController extends Controller
             'tanggal_lahir' => 'nullable'
         ]);
 
-        $siswa->update([
-            'name' => $request->name,
-            'nis' => $request->nis,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'kelas_id' => $request->kelas_id
-        ]);
+        $siswa = Siswa::findOrFail($id);
+        $siswa->name = $request->name;
+        $siswa->nis = $request->nis;
+        $siswa->jenis_kelamin = $request->jenis_kelamin;
+        $siswa->tanggal_lahir = $request->tanggal_lahir;
+        $siswa->kelas_id = $request->kelas_id;
+        $siswa->save();
 
         // log data siswa
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $siswa->id;
-        $log->method = 'Memperbarui Siswa Baru dengan Nama ' . $log->Siswa->name;
+        $log->kelas_id = $siswa->kelas_id;
+        $log->method = 'Memperbarui Siswa ' . $log->Siswa->name . ' ( Kelas-' . $log->Kelas->name . ')';
         $log->save();
+
 
         return redirect()->route('siswas.index')->with(['success' => 'Data Berhasil diupdate']);
     }
