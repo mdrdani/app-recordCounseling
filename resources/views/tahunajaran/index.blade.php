@@ -12,7 +12,7 @@
         </div>
         <div class="pull-right mb-2">
             @can('tahunajaran-create')
-            <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"> Create New Tahun Ajaran</a>
+            <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"> Buat Tahun Ajaran Baru</a>
             @endcan
         </div>
     </div>

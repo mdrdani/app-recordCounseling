@@ -12,7 +12,7 @@
         </div>
         @can('user-create')
         <div class="pull-right mb-2">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <a class="btn btn-success" href="{{ route('users.create') }}"> Buat User Baru</a>
           </div>
         @endcan
 
