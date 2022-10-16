@@ -76,7 +76,7 @@
   </tr>
   @empty
   <div class="alert alert-danger">
-    Data Siswa Tidak Ada
+    Data Siswa Masih Kosong
   </div>
  @endforelse
  </tbody>

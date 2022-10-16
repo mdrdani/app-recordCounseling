@@ -83,7 +83,7 @@
      </tr>
      @empty
      <div class="alert alert-danger">
-       Data Kelas Tidak Ada
+       Data Kelas Masih Kosong
      </div>
     @endforelse
   </tbody>
