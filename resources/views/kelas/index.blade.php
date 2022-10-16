@@ -13,7 +13,7 @@
         </div>
         <div class="pull-right mb-2">
           @can('kelas-create')
-            <a class="btn btn-success" href="{{ route('kelas.create') }}"> Create New Class</a>
+            <a class="btn btn-success" href="{{ route('kelas.create') }}"> Buat Kelas Baru</a>
             @endcan
         </div>
         <form action="{{route('kelas.index')}}">
@@ -44,6 +44,7 @@
     <tr>
       <th>No</th>
       <th>Kelas</th>
+      <th>Jenjang</th>
       <th>Wali Kelas</th>
       <th>Tahun Ajaran</th>
       <th width="280px">Action</th>
@@ -54,6 +55,7 @@
      <tr>
        <td>{{ ++$key }}</td>
        <td>{{ $kelas->name }}</td>
+       <td>{{ $kelas->jenjang }}</td>
        @if($kelas->user_id != Null)
                <td>{{ $kelas->User->name}}</td>
        @else

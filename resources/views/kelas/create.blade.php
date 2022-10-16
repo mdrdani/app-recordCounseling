@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Class</h2>
+            <h2>Buat Kelas Baru</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('kelas.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('kelas.index') }}"> Kembali</a>
         </div>
     </div>
 </div>
@@ -17,6 +17,25 @@
 <form action="{{ route('kelas.store') }}" method="POST">
 @csrf
 <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
+        <div class="form-group">
+            <strong>Jenjang Kelas:</strong>
+            <select name="jenjang" id="jenjang" class="form-control @error('jenjang') is-invalid @enderror">
+                <option value="">Pilih Jenjang</option>
+                <option value="TNTK">TNTK</option>
+                <option value="SD">SD</option>
+                <option value="SMP">SMP</option>
+                <option value="SMA">SMA</option>
+              </select>
+              <!-- error message untuk title -->
+              @error('jenjang')
+                      <div class="alert alert-danger mt-2">
+                          {{ $message }}
+                      </div>
+              @enderror
+        </div>
+    </div>
+
   <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
     <strong>Nama Kelas:</strong>
     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Kelas" autocomplete="off">

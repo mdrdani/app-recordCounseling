@@ -22,4 +22,9 @@ class LogSiswa extends Model
     {
         return $this->belongsTo(Siswa::class, 'siswa_id')->withTrashed();
     }
+
+    public function Kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id')->withTrashed();
+    }
 }

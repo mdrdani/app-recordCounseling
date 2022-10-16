@@ -13,10 +13,10 @@
       <h3 id="list-item-{{ $key+1 }}">Konseling-{{ $key+1 }}</h3>
       <h5><strong>Permasalahan : </strong></h5>
       <h5>{!! $note->masalah !!}</h5> 
-      <span>Dibuat Tanggal : {{ Carbon\Carbon::parse($note->created_at)->format('d M Y H:i') }} WIB<br> Oleh : {{ $note->User->name }} </span>
+      <span>Dibuat Tanggal : {{ Carbon\Carbon::parse($note->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB<br> Oleh : {{ $note->User->name }} </span>
       <br>
       @can('note-list')
-      <a href="{{ route('notes.show', ['id' => $note->siswa_id, 'note' => $note->id]) }}" class="btn btn-info btn-md mb-4">Detail Laporan</a>
+      <a href="{{ route('notes.show', ['id' => $note->siswa_id, 'note' => $note->id]) }}" class="btn btn-info btn-md mb-4">Detail Catatan</a>
       @endcan
         @endforeach
     </div>

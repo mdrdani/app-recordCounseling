@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <a class="btn btn-primary mb-2" href="{{ route('siswas.index') }}"> Back</a>
+            <a class="btn btn-primary mb-2" href="{{ route('siswas.index') }}"> Kembali</a>
             @can('note-create')
             <a class="btn btn-success mb-2" href="{{ route('notes.create', $siswa->id) }}"> Buat Laporan Konseling</a>
             @endcan
@@ -42,7 +42,7 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Full Name</h6>
+                          <h6 class="mb-0">Nama Lengkap</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
                           <b>{{ $siswa->name }}</b>
@@ -72,7 +72,7 @@
                           <h6 class="mb-0">Tanggal Lahir</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ Carbon\Carbon::parse($siswa->tanggal_lahir)->format('d M Y') }}
+                          {{ Carbon\Carbon::parse($siswa->tanggal_lahir)->translatedFormat('l, j F Y')}}
                         </div>
                       </div>
                       <hr>
@@ -90,7 +90,7 @@
                           <h6 class="mb-0">Dibuat :</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          {{ Carbon\Carbon::parse($siswa->created_at)->format('d M Y H:i') }} WIB
+                          {{ Carbon\Carbon::parse($siswa->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB
                         </div>
                       </div>
                     </div>

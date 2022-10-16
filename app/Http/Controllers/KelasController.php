@@ -27,11 +27,11 @@ class KelasController extends Controller
     public function index(Request $request)
     {
         //
-        $kelass = Kelas::orderBy('id', 'ASC')->paginate(6);
+        $kelass = Kelas::latest()->paginate(6);
         $filterKeyword = $request->get('name');
 
         if ($filterKeyword) {
-            $kelass = Kelas::where("name", "LIKE", "%$filterKeyword%")->paginate(6);
+            $kelass = Kelas::where("name", "LIKE", "%$filterKeyword%")->latest()->paginate(6);
         }
         return view('kelas.index', compact('kelass'));
     }
@@ -62,6 +62,7 @@ class KelasController extends Controller
     {
         //
         $this->validate($request, [
+            'jenjang' => 'required|string',
             'name' => 'required|string|min:3',
             'user_id' => 'required',
             'tahunajaran_id' => 'required'
@@ -69,6 +70,7 @@ class KelasController extends Controller
 
         $kelas = new Kelas;
         $kelas->id = $request->id;
+        $kelas->jenjang = $request->jenjang;
         $kelas->name = $request->name;
         $kelas->user_id = $request->user_id;
         $kelas->tahunajaran_id = $request->tahunajaran_id;
@@ -77,7 +79,7 @@ class KelasController extends Controller
         // log data
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
-        $log->method = 'Membuat Kelas Baru';
+        $log->method = 'Membuat Kelas Baru ' . $kelas->name;
         $log->save();
 
 
@@ -123,19 +125,24 @@ class KelasController extends Controller
     {
         //
         $this->validate($request, [
+            'jenjang' => 'required|string',
             'name' => 'required|string|min:3',
             'user_id' => 'required',
             'tahunajaran_id' => 'required'
         ]);
 
-        $input = $request->all();
-        $kelas = Kelas::find($id);
-        $kelas->update($input);
+        $kelas = Kelas::findOrFail($id);
+        $kelas->jenjang = $request->jenjang;
+        $kelas->name = $request->name;
+        $kelas->user_id = $request->user_id;
+        $kelas->tahunajaran_id = $request->tahunajaran_id;
+        $kelas->save();
+
 
         // log data
         $log = new LogSiswa;
         $log->user_id = Auth::user()->id;
-        $log->method = 'Perbarui Kelas';
+        $log->method = 'Perbarui Kelas ' . $kelas->name;
         $log->save();
 
 
@@ -158,7 +165,7 @@ class KelasController extends Controller
         $log->method = 'Menghapus Kelas';
         $log->save();
 
-        return redirect()->route('kelas.index')->with(['success' => 'Class Deleted Successfully']);
+        return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Di Hapus']);
     }
 
     public function ajaxSearch(Request $request)

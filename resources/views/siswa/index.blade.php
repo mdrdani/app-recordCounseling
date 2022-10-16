@@ -12,7 +12,7 @@
         </div>
         <div class="pull-right mb-2">
             @can('siswa-create')
-            <a class="btn btn-success" href="{{ route('siswas.create') }}"> Create New Siswa</a>
+            <a class="btn btn-success" href="{{ route('siswas.create') }}"> Buat Siswa Baru</a>
             @endcan
         </div>
 
@@ -44,6 +44,7 @@
    <tr>
     <th>No</th>
     <th>Nama</th>
+    <th>Jenjang</th>
     <th>Kelas</th>
     <th>Wali Kelas</th>
     <th>Tahun Ajaran</th>
@@ -55,6 +56,7 @@
   <tr>
     <td><center>{{ ++$key }}</center></td>
     <td>{{ $siswa->name }}</td>
+    <td>{{ $siswa->Kelas->jenjang}}</td>
     <td>{{ $siswa->Kelas->name}}</td>
     <td>{{ $siswa->Kelas->User->name }}</td>
     <td>{{ $siswa->Kelas->TahunAjaran->tahun }}</td>
