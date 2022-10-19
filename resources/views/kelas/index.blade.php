@@ -53,7 +53,7 @@
   <tbody>
     @forelse ($kelass as $key => $kelas)
      <tr>
-       <td>{{ ++$key }}</td>
+       <td>{{ $kelass->firstItem() + $key }}</td>
        <td>{{ $kelas->name }}</td>
        <td>{{ $kelas->jenjang }}</td>
        @if($kelas->user_id != Null)

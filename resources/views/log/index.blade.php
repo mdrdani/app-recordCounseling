@@ -23,7 +23,7 @@
  <tbody>
   @forelse ($logs as $key => $log)
   <tr>
-    <td><center>{{ ++$key }}</center></td>
+    <td><center>{{ $logs->firstItem() + $key }}</center></td>
     <td><strong>{{ $log->User->name }}</strong></td>
     <td><strong>{{ $log->method }}</strong></td>
     <td>{{ Carbon\Carbon::parse($log->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB</td>

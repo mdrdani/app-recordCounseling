@@ -29,7 +29,7 @@
   <tbody>
     @forelse($roles as $key => $role)
   <tr>
-    <td>{{ ++$key }}</td>
+    <td>{{ $roles->firstItem() + $key }}</td>
     <td>{{ $role->name }}</td>
     <td>
       <div class="btn-group" role="group" aria-label="Basic Example">

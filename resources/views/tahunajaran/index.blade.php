@@ -30,7 +30,7 @@
  <tbody>
   @forelse ($tahunajarans as $key => $tahun)
   <tr>
-    <td><center>{{ ++$key }}</center></td>
+    <td><center>{{ $tahunajarans->firstItem() + $key }}</center></td>
     <td>{{ $tahun->tahun }}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic Example">

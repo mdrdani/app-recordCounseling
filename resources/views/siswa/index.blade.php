@@ -54,7 +54,7 @@
  <tbody>
   @forelse ($siswas as $key => $siswa)
   <tr>
-    <td><center>{{ ++$key }}</center></td>
+    <td><center>{{ $siswas->firstItem() + $key }}</center></td>
     <td>{{ $siswa->name }}</td>
     <td>{{ $siswa->Kelas->jenjang}}</td>
     <td>{{ $siswa->Kelas->name}}</td>

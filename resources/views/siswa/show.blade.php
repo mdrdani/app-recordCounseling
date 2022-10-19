@@ -99,6 +99,8 @@
               </div>
             </div>
           </div>
+          @can('note-list')
           @include('notes.index')
+          @endcan
 </div>
 @endsection 
