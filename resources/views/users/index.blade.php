@@ -52,7 +52,7 @@
     <tbody>
       @forelse($users as $key => $user)
     <tr>
-      <td>{{ ++$key }}</td>
+      <td>{{ $users->firstItem() + $key }}</td>
       <td>{{ $user->name }}</td>
       <td>{{ $user->username}}</td>
       <td>
