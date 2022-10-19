@@ -144,7 +144,7 @@ class SiswaController extends Controller
         $log->user_id = Auth::user()->id;
         $log->siswa_id = $siswa->id;
         $log->kelas_id = $siswa->kelas_id;
-        $log->method = 'Memperbarui Siswa ' . $log->Siswa->name . ' ( Kelas-' . $log->Kelas->name . ')';
+        $log->method = 'Memperbarui Siswa ' . $log->Siswa->name . ' ( Kelas-' . $log->Kelas->name . ' | T.A ' . $log->Kelas->TahunAjaran->tahun . ')';
         $log->save();
 
 
