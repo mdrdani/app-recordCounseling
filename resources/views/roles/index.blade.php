@@ -12,7 +12,7 @@
         </div>
         <div class="pull-right mb-2">
             @can('role-create')
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
+            <a class="btn btn-success" href="{{ route('roles.create') }}"> Buat Role Baru</a>
             @endcan
         </div>
     </div>
