@@ -36,5 +36,5 @@
  @endforelse
  </tbody>
 </table>
-{{ $logs->links() }}
+{{ $logs->onEachSide(1)->links() }}
 @endsection 

@@ -12,7 +12,7 @@
         </div>
         <div class="pull-right mb-2">
             @can('siswa-create')
-            <a class="btn btn-success" href="{{ route('siswas.create') }}"> Buat Siswa Baru</a>
+            <a class="btn btn-success" href="{{ route('siswas.create') }}"><i class="bi bi-plus-circle"></i> Buat Siswa Baru</a>
             @endcan
         </div>
 
@@ -42,13 +42,13 @@
 <table class="table table-bordered">
  <thead>
    <tr>
-    <th>No</th>
-    <th>Nama</th>
-    <th>Jenjang</th>
-    <th>Kelas</th>
-    <th>Wali Kelas</th>
-    <th>Tahun Ajaran</th>
-    <th width="280px">Action</th>
+    <th><center>No</center></th>
+    <th><center>Nama</center></th>
+    <th><center>Jenjang</center></th>
+    <th><center>Kelas</center></th>
+    <th><center>Wali Kelas</center></th>
+    <th><center>Tahun Ajaran</center></th>
+    <th width="280px"><center>Action</center></th>
   </tr>
  </thead>
  <tbody>
@@ -56,21 +56,21 @@
   <tr>
     <td><center>{{ $siswas->firstItem() + $key }}</center></td>
     <td>{{ $siswa->name }}</td>
-    <td>{{ $siswa->Kelas->jenjang}}</td>
-    <td>{{ $siswa->Kelas->name}}</td>
-    <td>{{ $siswa->Kelas->User->name }}</td>
-    <td>{{ $siswa->Kelas->TahunAjaran->tahun }}</td>
+    <td><center>{{ $siswa->Kelas->jenjang}}</center></td>
+    <td><center>{{ $siswa->Kelas->name}}</center></td>
+    <td><center>{{ $siswa->Kelas->User->name }}</center></td>
+    <td><center>{{ $siswa->Kelas->TahunAjaran->tahun }}</center></td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic Example">
-        <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning">Lihat Catatan</a>
+        <a href="{{ route('siswas.show', $siswa->id) }}" class="btn btn-md btn-warning"><i class="bi bi-journals"></i> Lihat Catatan</a>
         @can('siswa-edit')
-        <a href="{{ route('siswas.edit', $siswa->id) }}" class="btn btn-md btn-primary">Edit</a>
+        <a href="{{ route('siswas.edit', $siswa->id) }}" class="btn btn-md btn-primary"><i class="bi bi-pencil-square"></i></a>
         @endcan
         @can('siswa-delete')
         <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('siswas.destroy', $siswa->id) }}" method="POST">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+        <button type="submit" class="btn btn-md btn-danger"><i class="bi bi-x-circle"></i></button>
       </form>
       @endcan
     </div>
@@ -83,7 +83,7 @@
  @endforelse
  </tbody>
 </table>
-{{ $siswas->links() }}
+{{ $siswas->onEachSide(1)->links() }}
 @endsection 
 
 @section('scripts')

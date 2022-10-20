@@ -4,10 +4,13 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
+      <div class="pull-left">
+        <h2>Catatan {{ $siswa->name }}</h2>
+    </div>
         <div class="pull-right">
-            <a class="btn btn-primary mb-2" href="{{ route('siswas.show', $siswa->id) }}"> Back</a>
+            <a class="btn btn-primary mb-2" href="{{ route('siswas.show', $siswa->id) }}"><i class="bi bi-backspace"></i> Kembali</a>
             @can('note-edit')
-            <a class="btn btn-success mb-2" href="{{ route('notes.edit', ['id' => $siswa->id, 'note' => $note->id]) }}"> Edit Catatan</a>
+            <a class="btn btn-warning mb-2" href="{{ route('notes.edit', ['id' => $siswa->id, 'note' => $note->id]) }}"><i class="bi bi-pencil-square"></i> Edit Catatan</a>
             @endcan
         </div>
     </div>
@@ -23,7 +26,7 @@
                     <h6 class="mb-0">Tanggal Konsultasi</h6>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    <b>{{ Carbon\Carbon::parse($note->tanggal)->format('d M Y') }}
+                    <b>{{ Carbon\Carbon::parse($note->tanggal)->translatedFormat('l, j F Y') }}
                   </div>
                 </div>
                 <hr>

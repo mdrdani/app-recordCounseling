@@ -12,7 +12,7 @@
         </div>
         @can('user-create')
         <div class="pull-right mb-2">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Buat User Baru</a>
+            <a class="btn btn-success" href="{{ route('users.create') }}"><i class="bi bi-plus-circle"></i> Buat User Baru</a>
           </div>
         @endcan
 
@@ -65,18 +65,18 @@
       <td>
         <div class="btn-group" role="group" aria-label="Basic Example">
         @can('user-edit')
-        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary">Edit</a>
+        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-primary"><i class="bi bi-pencil-square"></i></a>
         @endcan
   
         @can('user-list')
-        <a href="{{ route('users.show', $user->id) }}" class="btn btn-md btn-warning">Show</a>
+        <a href="{{ route('users.show', $user->id) }}" class="btn btn-md btn-warning"><i class="bi bi-eye"></i></a>
         @endcan
   
         @can('user-delete')
         <form action="{{ route('users.destroy', $user->id) }}" onsubmit="return confirm('apakah anda yakin?');" method="POST">
           @csrf
           @method('DELETE')
-            <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+            <button type="submit" class="btn btn-md btn-danger"><i class="bi bi-x-circle"></i></button>
         </form>
         @endcan
       </div>
@@ -90,7 +90,7 @@
     </tbody>
   </table>
 </div>
-{{ $users->links() }}
+{{ $users->onEachSide(1)->links() }}
 @endsection 
 
 @section('scripts')

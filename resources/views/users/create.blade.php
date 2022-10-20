@@ -2,13 +2,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
+<div class="row mb-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New User</h2>
+            <h2>Buat User Baru</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('users.index') }}"><i class="bi bi-backspace"></i> Kembali</a>
         </div>
     </div>
 </div>
@@ -77,8 +77,8 @@
                 {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
         </div>
     </div>
 </form>
