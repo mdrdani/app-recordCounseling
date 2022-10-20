@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totallaki = Siswa::where('jenis_kelamin', 'Laki-Laki')->count();
+        $totalperempuan = Siswa::where('jenis_kelamin', 'Perempuan')->count();
+        $totalall = Siswa::count();
+        return view('home', compact('totallaki', 'totalperempuan', 'totalall'));
     }
 }

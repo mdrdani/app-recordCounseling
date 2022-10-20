@@ -19,7 +19,7 @@
 </div>
 
 
-<table class="table table-bordered">
+<table class="table table-bordered table-responsive">
  <thead>
    <tr>
     <th><center>No</center></th>
