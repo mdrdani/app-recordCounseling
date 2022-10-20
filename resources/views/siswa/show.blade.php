@@ -6,9 +6,9 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <a class="btn btn-primary mb-2" href="{{ route('siswas.index') }}"> Kembali</a>
+            <a class="btn btn-primary mb-2" href="{{ route('siswas.index') }}"><i class="bi bi-backspace"></i> Kembali</a>
             @can('note-create')
-            <a class="btn btn-success mb-2" href="{{ route('notes.create', $siswa->id) }}"> Buat Laporan Konseling</a>
+            <a class="btn btn-success mb-2" href="{{ route('notes.create', $siswa->id) }}"><i class="bi bi-plus-circle"></i> Buat Laporan Konseling</a>
             @endcan
         </div>
     </div>

@@ -3,13 +3,13 @@
 
 
 @section('content')
-<div class="row">
+<div class="row mb-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Edit New User</h2>
+            <h2>Edit User {{ $user->name }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('users.index') }}"><i class="bi bi-backspace"></i> Kembali</a>
         </div>
     </div>
 </div>
@@ -82,8 +82,8 @@
             {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Update</button>
     </div>
 </div>
 </form>

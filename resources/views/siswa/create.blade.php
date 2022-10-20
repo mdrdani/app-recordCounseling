@@ -13,7 +13,7 @@
             <h2>Buat Siswa Baru</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('siswas.index') }}"> Kembali</a>
+            <a class="btn btn-primary" href="{{ route('siswas.index') }}"><i class="bi bi-backspace"></i> Kembali</a>
         </div>
     </div>
 </div>
@@ -89,8 +89,8 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-            <button type="submit" class="btn btn-md btn-primary">Submit</button>
-            <button type="reset" class="btn btn-md btn-warning">Reset</button>
+            <button type="submit" class="btn btn-md btn-primary"><i class="bi bi-save"></i> Simpan</button>
+            <button type="reset" class="btn btn-md btn-warning"><i class="bi bi-x-octagon"></i> Reset</button>
         </div>
     </div>
 </form>

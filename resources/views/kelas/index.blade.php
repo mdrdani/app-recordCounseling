@@ -13,7 +13,7 @@
         </div>
         <div class="pull-right mb-2">
           @can('kelas-create')
-            <a class="btn btn-success" href="{{ route('kelas.create') }}"> Buat Kelas Baru</a>
+            <a class="btn btn-success" href="{{ route('kelas.create') }}"><i class="bi bi-plus-circle"></i> Buat Kelas Baru</a>
             @endcan
         </div>
         <form action="{{route('kelas.index')}}">
@@ -42,42 +42,42 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>No</th>
-      <th>Kelas</th>
-      <th>Jenjang</th>
-      <th>Wali Kelas</th>
-      <th>Tahun Ajaran</th>
+      <th><center>No</center></th>
+      <th><center>Kelas</center></th>
+      <th><center>Jenjang</center></th>
+      <th><center>Wali Kelas</center></th>
+      <th><center>Tahun Ajaran</center></th>
       <th width="280px">Action</th>
     </tr>
   </thead>
   <tbody>
     @forelse ($kelass as $key => $kelas)
      <tr>
-       <td>{{ $kelass->firstItem() + $key }}</td>
-       <td>{{ $kelas->name }}</td>
-       <td>{{ $kelas->jenjang }}</td>
+       <td><center>{{ $kelass->firstItem() + $key }}</center></td>
+       <td><center>{{ $kelas->name }}</center></td>
+       <td><center>{{ $kelas->jenjang }}</center></td>
        @if($kelas->user_id != Null)
-               <td>{{ $kelas->User->name}}</td>
+               <td><center>{{ $kelas->User->name}}</center></td>
        @else
-               <td><strong>Belum Ada Wali Kelas</strong></td>
+               <td><center><strong>Belum Ada Wali Kelas</strong></center></td>
        @endif
    
        @if($kelas->tahunajaran_id != Null)
-               <td>{{ $kelas->TahunAjaran->tahun}}</td>
+               <td><center>{{ $kelas->TahunAjaran->tahun}}</center></td>
        @else
-               <td><strong>Belum Ada Tahun Ajaran</strong></td>
+               <td><center><strong>Belum Ada Tahun Ajaran</strong></center></td>
        @endif
        <td>
         <div class="btn-group" role="group" aria-label="Basic Example">
         @can('kelas-edit')
-         <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-md btn-primary">Edit</a>
+         <a href="{{ route('kelas.edit', $kelas->id) }}" class="btn btn-md btn-primary"><i class="bi bi-pencil-square"></i></a>
         @endcan
 
         @can('kelas-delete')
          <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('kelas.destroy', $kelas->id) }}" method="POST">
          @csrf
          @method('DELETE')
-         <button type="submit" class="btn btn-md btn-danger">Hapus</button>
+         <button type="submit" class="btn btn-md btn-danger"><i class="bi bi-x-circle"></i></button>
        </form>
        @endcan
       </div>

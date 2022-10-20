@@ -2,7 +2,7 @@
 <div class="col-2">
   <div id="list-example" class="list-group">
     @foreach ($notes as $key => $note)
-    <a class="list-group-item list-group-item-action" href="#list-item-{{ $key+1 }}">Konseling-{{ $key+1 }}</a>
+    <a class="list-group-item list-group-item-action" href="#list-item-{{ $key+1 }}"><i class="bi bi-bookmark-check"></i> Konseling-{{ $key+1 }}</a>
     @endforeach
   </div>
 </div>
@@ -16,8 +16,9 @@
       <span>Dibuat Tanggal : {{ Carbon\Carbon::parse($note->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB<br> Oleh : {{ $note->User->name }} </span>
       <br>
       @can('note-list')
-      <a href="{{ route('notes.show', ['id' => $note->siswa_id, 'note' => $note->id]) }}" class="btn btn-info btn-md mb-4">Detail Catatan</a>
+      <a href="{{ route('notes.show', ['id' => $note->siswa_id, 'note' => $note->id]) }}" class="btn btn-info btn-md "><i class="bi bi-journals"></i> Detail Catatan</a>
       @endcan
+      <hr>
         @endforeach
     </div>
 </div>

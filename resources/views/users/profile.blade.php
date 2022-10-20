@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endsection
 @section('content')
-<div class="row">
+<div class="row mb-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Profile {{ Auth::user()->name }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('home') }}"><i class="bi bi-backspace"></i> Kembali</a>
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-2">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Update</button>
     </div>
 </div>
 </form>

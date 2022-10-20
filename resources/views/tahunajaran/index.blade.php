@@ -12,7 +12,7 @@
         </div>
         <div class="pull-right mb-2">
             @can('tahunajaran-create')
-            <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"> Buat Tahun Ajaran Baru</a>
+            <a class="btn btn-success" href="{{ route('tahunajaran.create') }}"><i class="bi bi-plus-circle"></i> Buat Tahun Ajaran Baru</a>
             @endcan
         </div>
     </div>
@@ -22,7 +22,7 @@
 <table class="table table-bordered">
  <thead>
    <tr>
-    <th>No</th>
+    <th><center>No</center></th>
     <th>Tahun</th>
     <th width="280px">Action</th>
   </tr>
@@ -36,7 +36,7 @@
         <div class="btn-group" role="group" aria-label="Basic Example">
         @if($tahun->deleted_at == NULL)
         @can('tahunajaran-edit')
-        <a href="{{ route('tahunajaran.edit', $tahun->id) }}" class="btn btn-md btn-primary">Edit</a>
+        <a href="{{ route('tahunajaran.edit', $tahun->id) }}" class="btn btn-md btn-primary"><i class="bi bi-pencil-square"></i></a>
         @endcan
         @endif
             
@@ -45,7 +45,7 @@
         @can('tahunajaran-delete')
         <form onsubmit="return confirm('Apakah Anda yakin? Pastikan Siswa Yang Masih Aktif Sudah Di pindahkan Kelasnya !!');" action="{{ route('tahunajaran.destroy', $tahun->id) }}" method="POST" class="d-inline">
         @csrf
-        <button type="submit" class="btn btn-md btn-danger">NonAktifkan</button>
+        <button type="submit" class="btn btn-md btn-danger"><i class="bi bi-x-circle"></i> Non-Aktif</button>
         @method('DELETE')
       </form>
       @endcan
@@ -66,7 +66,7 @@
  @endforelse
  </tbody>
 </table>
-{{ $tahunajarans->links() }}
+{{ $tahunajarans->onEachSide(1)->links() }}
 @endsection 
 
 @section('scripts')
