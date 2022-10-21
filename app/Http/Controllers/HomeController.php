@@ -24,9 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $totallaki = Siswa::where('jenis_kelamin', 'Laki-Laki')->count();
-        $totalperempuan = Siswa::where('jenis_kelamin', 'Perempuan')->count();
-        $totalall = Siswa::count();
+        $totallaki = Siswa::where('jenis_kelamin', 'Laki-Laki')->withTrashed()->count();
+        $totalperempuan = Siswa::where('jenis_kelamin', 'Perempuan')->withTrashed()->count();
+        $totalall = Siswa::withTrashed()->count();
         return view('home', compact('totallaki', 'totalperempuan', 'totalall'));
     }
 }
