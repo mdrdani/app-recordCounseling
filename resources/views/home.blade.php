@@ -14,10 +14,10 @@
                         </div>
                     @endif
                     <img src="https://pbs.twimg.com/profile_images/1410453968/SDB_logo_400x400.jpg" alt="" width="30%" class="rounded mx-auto d-block">
-                    <p class="h3 mt-2 text-center">Selamat Datang Di Aplikasi Record Counseling <br> Sekolah Darma Bangsa</p>
+                    <p class="h3 mt-3 text-center">Selamat Datang Di Aplikasi Record Counseling <br> Sekolah Darma Bangsa</p>
                     
                     <div class="container">
-                        <div class="row mt-5">
+                        <div class="row mt-4">
                             <div class="col-md-4">
                                 <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Total Laki Laki</div>
