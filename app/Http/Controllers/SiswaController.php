@@ -26,11 +26,25 @@ class SiswaController extends Controller
     public function index(Request $request)
     {
         //
-        $siswas = Siswa::latest()->paginate(10);
+        $user_id = auth()->user()->id;
+
+        $kelas = Kelas::where('user_id', $user_id)->first();
+        if (!$kelas) {
+            $siswas = Siswa::latest()->paginate(10);
+        } else {
+            $siswas = Siswa::where('kelas_id', $kelas->id)->latest()->paginate(10);
+        }
         $filterKeyword = $request->get('name');
 
         if ($filterKeyword) {
-            $siswas = Siswa::where("name", "LIKE", "%$filterKeyword%")->paginate(10);
+            if (!$kelas) {
+                $siswas = Siswa::where("name", "LIKE", "%$filterKeyword%")
+                    ->paginate(10);
+            } else {
+                $siswas = Siswa::where('kelas_id', $kelas->id)
+                    ->where("name", "LIKE", "%$filterKeyword%")
+                    ->paginate(10);
+            }
         }
 
         return view('siswa.index', compact('siswas'));
