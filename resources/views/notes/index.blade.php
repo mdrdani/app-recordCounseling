@@ -9,10 +9,11 @@
 
 <div class="col-10">
   <div data-bs-spy="scroll" data-bs-target="#list-example" style="overflow-y: scroll; height:450px" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
-    @foreach($notes as $key => $note)  
+    @foreach($notes as $key => $note)
       <h3 id="list-item-{{ $key+1 }}">Konseling-{{ $key+1 }}</h3>
       <h5><strong>Permasalahan : </strong></h5>
-      <h5>{!! $note->masalah !!}</h5> 
+      {{-- <h5>{!! $note->masalah !!}</h5>  --}}
+      <h5>{!! \Illuminate\Support\Str::limit($note->masalah, 150, '...') !!}</h5>
       <span>Dibuat Tanggal : {{ Carbon\Carbon::parse($note->created_at)->translatedFormat('l, j F Y ; h:i a') }} WIB<br> Oleh : {{ $note->User->name }} </span>
       <br>
       @can('note-list')
