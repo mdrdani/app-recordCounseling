@@ -67,11 +67,11 @@
     //message with toastr
     @if(session()->has('success'))
     
-        toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+    toastr.success('{{ session('success') }}', 'BERHASIL!', { positionClass: 'toast-bottom-right' });
 
     @elseif(session()->has('error'))
 
-        toastr.error('{{ session('error') }}', 'GAGAL!'); 
+    toastr.error('{{ session('error') }}', 'GAGAL!', { positionClass: 'toast-bottom-right' });
         
     @endif
 </script>
